@@ -31,7 +31,6 @@ const Home = () =>  (
         <Business />
         <Custom />
         <EcomTemps />
-        <GetStarted />
         <LandingTemps />
         <PortTemps />
         <Stats />

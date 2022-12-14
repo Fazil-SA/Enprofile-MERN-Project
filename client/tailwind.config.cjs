@@ -4,6 +4,10 @@ module.exports = {
   mode: "jit",
   theme: {
     extend: {
+      animation: {
+        'spin-bounce': 'bounce 6s linear infinite',
+        'ping-slow': 'ping 5s cubic-bezier(1, 1, 0.2, 1) infinite',
+      },
       colors: {
         primary: "#00040f", 
         secondary: "#00f6ff",
