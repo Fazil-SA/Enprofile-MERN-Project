@@ -1,9 +1,16 @@
 import React from 'react'
 import styles from './style'
-import {Home} from './pages/user/userPages'
+import {Login,Register,Home} from './pages/user/userPages'
+import {Route , Routes} from 'react-router-dom'
 
 const App = () =>  (
-   <Home />
+  <Routes>
+    
+    <Route path='/login' element={<Login />} />
+    <Route path='/register' element={<Register />} />
+    <Route path='/' element={<Home />} />
+
+  </Routes>
   )
 
 
