@@ -28,12 +28,12 @@ const Home = () =>  (
 
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth} text-white`}>
+        <Stats />
         <Business />
         <Custom />
         <EcomTemps />
         <LandingTemps />
         <PortTemps />
-        <Stats />
         <Testimonials />
         <Footer />
         </div>

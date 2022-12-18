@@ -1,16 +1,8 @@
 import React from 'react'
-import styles from './style'
-import {Login,Register,Home} from './pages/user/userPages'
-import {Route , Routes} from 'react-router-dom'
+import UserRoutes from './routes/user/userRoutes'
 
 const App = () =>  (
-  <Routes>
-    
-    <Route path='/login' element={<Login />} />
-    <Route path='/register' element={<Register />} />
-    <Route path='/' element={<Home />} />
-
-  </Routes>
+    <UserRoutes />
   )
 
 
