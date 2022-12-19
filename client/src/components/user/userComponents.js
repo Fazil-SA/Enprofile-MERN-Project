@@ -9,6 +9,7 @@ import NavBar from './NavBar'
 import PortTemps from './PortTemps' 
 import Stats from './Stats' 
 import Testimonials from './Testimonials' 
+import Button from './Button' 
 
 export {
     Business,
@@ -21,5 +22,6 @@ export {
     NavBar,
     PortTemps,
     Stats,
-    Testimonials
+    Testimonials,
+    Button,
 }
