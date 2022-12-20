@@ -10,6 +10,8 @@ import PortTemps from './PortTemps'
 import Stats from './Stats' 
 import Testimonials from './Testimonials' 
 import Button from './Button' 
+import LoginForm from './LoginForm'
+import RegisterForm from './RegisterForm'
 
 export {
     Business,
@@ -24,4 +26,6 @@ export {
     Stats,
     Testimonials,
     Button,
+    LoginForm,
+    RegisterForm,
 }
