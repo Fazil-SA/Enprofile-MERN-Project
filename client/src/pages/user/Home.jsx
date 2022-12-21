@@ -2,15 +2,15 @@ import React from 'react'
 import styles from '../../style'
 import {Business,
   Custom,
-  EcomTemps,
   Footer,
   GetStarted,
   Hero,
-  LandingTemps,
   NavBar,
-  PortTemps,
   Stats,
-  Testimonials} from '../../components/user/userComponents'
+  Card,
+  ServiceCard} from '../../components/user/userComponents'
+import { pricing , templates , feedback } from '../../constants/user/index'
+
 
 const Home = () =>  (
     <div className='bg-primary w-full overflow-hidden'>
@@ -30,11 +30,19 @@ const Home = () =>  (
         <div className={`${styles.boxWidth} text-white`}>
         <Stats />
         <Business />
+        { /* pricing */ }
+        <Card pricing={pricing} styles={styles} head="Pricing Plans"/>
+        <ServiceCard />
+        {/* PortTemps */}
+        <Card pricing={templates} styles={styles} head="Portfolio" />
+        {/* EcomTemps */}
+        <Card pricing={templates} styles={styles} head="E-Commerce" />
+        {/* LandingTemps */}
+        <Card pricing={templates} styles={styles} head="Landing Page" />
         <Custom />
-        <EcomTemps />
-        <LandingTemps />
-        <PortTemps />
-        <Testimonials />
+        {/* Testimonials */}
+        <Card pricing={feedback} styles={styles} head="What Our Customer Says" />
+
         <Footer />
         </div>
       </div>

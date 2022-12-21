@@ -1,4 +1,4 @@
-import { people01, people02, people03, facebook, instagram, linkedin, twitter, airbnb, binance, coinbase, dropbox, send, shield, star  } from "../../assets/user/index";
+import { people01, people02, people03, facebook, instagram, linkedin, twitter, airbnb, binance, coinbase, dropbox, send, shield, star, demo  } from "../../assets/user/index";
 
 export const navLinks = [
   {
@@ -52,43 +52,75 @@ export const feedback = [
     id: "feedback-1",
     content:
       "Money is only a tool. It will take you wherever you wish, but it will not replace you as the driver.",
-    name: "Herman Jensen",
-    title: "Founder & Leader",
-    img: people01,
+      title: "Herman Jensen",
+    img: demo,
   },
   {
     id: "feedback-2",
     content:
       "Money makes your life easier. If you're lucky to have it, you're lucky.",
-    name: "Steve Mark",
-    title: "Founder & Leader",
-    img: people02,
+    title: "Steve Mark",
+    img: demo,
   },
   {
     id: "feedback-3",
     content:
       "It is usually people in the money business, finance, and international trade that are really rich.",
-    name: "Kenn Gallagher",
-    title: "Founder & Leader",
-    img: people03,
+      title: "Kenn Gallagher",
+    img: demo,
   },
 ];
 
 export const stats = [
   {
     id: "stats-1",
-    title: "User Active",
     value: "3800+",
+    title: "USER ACTIVE"
   },
   {
     id: "stats-2",
-    title: "Trusted by Company",
     value: "230+",
+    title: "TRUSTED BY COMPANY"
   },
   {
     id: "stats-3",
-    title: "Transaction",
     value: "$230M+",
+    title: "TRANSACTION"
+  },
+];
+export const pricing = [
+  {
+    id: "pricing-1",
+    head : "Pricing Plans",
+    title : "Portfolio",
+    img: demo,
+  },
+  {
+    id: "pricing-2",
+    title : "Ecommerce",
+    img: demo,
+  },
+  {
+    id: "pricing-3",
+    title : "Landing Page",
+    img: demo,
+  },
+];
+export const templates = [
+  {
+    id: "template-1",
+    title : "T-1",
+    img: demo,
+  },
+  {
+    id: "template-2",
+    title : "T-2",
+    img: demo,
+  },
+  {
+    id: "template-3",
+    title : "T-3",
+    img: demo,
   },
 ];
 
