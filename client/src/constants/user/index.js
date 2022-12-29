@@ -6,10 +6,6 @@ export const navLinks = [
     title: "Features",
   },
   {
-    id: "Pricing",
-    title: "Pricing",
-  },
-  {
     id: "Affiliate",
     title: "Affiliate",
   },

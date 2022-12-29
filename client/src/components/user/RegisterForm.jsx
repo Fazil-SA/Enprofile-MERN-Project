@@ -1,17 +1,20 @@
 import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import {useNavigate} from 'react-router-dom'
 
 
 const RegisterForm = () => {
   const [isVisible, setVisible] = useState(false);
   const [pw, setPwmatch] = useState(false);
-  
+  const [userExist, setUserExist] = useState('');
+  const navigate = useNavigate()
   //validation-form
   const { register, handleSubmit, formState: { errors } } = useForm();
   const isValidate = {
     required : "*This field is required",
-    pwMatch : "*Password not matching"
+    pwMatch : "*Password not matching",
+    userExists : "*User exists"
   }
 
   async function onSubmit(data) {
@@ -19,7 +22,6 @@ const RegisterForm = () => {
     if(data.password !== data.confirmPassword){
       setPwmatch(true)
     } else {
-
       const response = await fetch('http://localhost:5000/register',{
         method : "POST",
         headers : {
@@ -29,11 +31,22 @@ const RegisterForm = () => {
       })
       const status = await response.json()
       console.log(status)
+      if(status.error === 'User email already registered'){
+        setUserExist(isValidate.userExists)
+      }
+      if(status.status === 'user registered'){
+        navigate('/login')
+      } 
+      if(error.err === 'user registered'){
+        navigate('/login')
+      } 
     }
   }
   return (
     <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
       <div>
+      <p className="text-red-600 p-1">{userExist}</p>
+
         <label
           htmlFor="userName"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

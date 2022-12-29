@@ -1,9 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import {useNavigate} from 'react-router-dom'
 
 const LoginForm = () => {
+  const [isVisible, setVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [err, setErr] = useState('');
+  const navigate = useNavigate()
+  
+  //validation-form
+  const isValidate = {
+    required : "*This field is required",
+    wrongPw : "wrong password!!"
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+      const response = await fetch('http://localhost:5000/login',{
+        method : "POST",
+        headers : {
+          'Content-Type' : 'application/json',
+        },
+        body : JSON.stringify({email:email,password:password})
+      })
+      const status = await response.json()
+      if(status.status === "User Logined Successfully"){
+        navigate('/')
+      }
+      if(status.err === "no login data"){
+        setErr('Invalid user credentials')
+      }
+      if(status === isValidate.wrongPw) {
+        setErr(isValidate.wrongPw)
+      }
+      // if(error.err === "Wrong password"){
+      //   setErr('Invalid user credentials')
+      // }
+    }
+
   return (
-    <form className="space-y-4" action="#">
+    <form className="space-y-4" onSubmit={handleSubmit}>
       <div>
+       <p className="text-red-600">{isValidate.userExists}</p>
+       <p className="text-red-600 mb-2">{err}</p>
         <label
           for="email"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -14,9 +54,12 @@ const LoginForm = () => {
           type="email"
           name="email"
           id="email"
+          value={email}
+          onChange={(e)=>setEmail(e.target.value)}
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Email"
           required=""
+          
         />
       </div>
 
@@ -28,12 +71,15 @@ const LoginForm = () => {
           Password
         </label>
         <input
-          type="password"
+          type={isVisible ? "text" : "password"}
           name="password"
           id="password"
+          value={password}
+          onChange={(e)=>setPassword(e.target.value)}
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required=""
+          
         />
       </div>
       <div className="flex items-center justify-between">
@@ -45,11 +91,14 @@ const LoginForm = () => {
               type="checkbox"
               className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
               required=""
+              onClick={() => {
+                setVisible((prev) => !prev);
+              }}
             />
           </div>
           <div className="ml-3 text-sm">
             <label for="remember" className="text-gray-500 dark:text-gray-300">
-              Remember me
+              Show Password
             </label>
           </div>
         </div>

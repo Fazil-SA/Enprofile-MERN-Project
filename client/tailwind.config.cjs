@@ -16,6 +16,7 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        signature: ["Great Vibes"]
       },
     },
     screens: {
