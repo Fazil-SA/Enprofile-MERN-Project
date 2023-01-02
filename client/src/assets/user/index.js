@@ -25,6 +25,12 @@ import people02 from "./people02.png";
 import people03 from "./people03.png";
 import demo from "./demo.png";
 
+import arrayDestruct from "./portfolio-t1/arrayDestruct.jpg";
+import installNode from "./portfolio-t1/installNode.jpg"
+import navbar from "./portfolio-t1/navbar.jpg"
+import reactParallax from "./portfolio-t1/reactParallax.jpg"
+import reactSmooth from "./portfolio-t1/reactSmooth.jpg"
+import reactWeather from "./portfolio-t1/reactWeather.jpg"
 
 export {
   airbnb,
@@ -52,5 +58,11 @@ export {
   people01,
   people02,
   people03,
-  demo
+  demo,
+  arrayDestruct,
+  installNode,
+  navbar,
+  reactParallax,
+  reactSmooth,
+  reactWeather
 };
