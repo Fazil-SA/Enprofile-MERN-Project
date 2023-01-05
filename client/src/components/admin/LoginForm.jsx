@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { axiosUserInstance } from "../../Instance/Axios";
+import { axiosAdminInstance } from "../../Instance/Axios";
 
 const LoginForm = () => {
   const [isVisible, setVisible] = useState(false);
@@ -20,19 +20,21 @@ const LoginForm = () => {
     event.preventDefault();
 
     if (!email || !password) {
-      setErr("All field is required");
+      setErr("All fields are required");
     } else {
-      const response = await axiosUserInstance
-        .post("/login", { email: email, password: password })
+      const data = { email: email, password: password }
+      const response = await axiosAdminInstance
+        .post("/adminLogin",data)
         .then((response) => {
-          if (response.data.status === "User Logined Successfully") {
-            navigate("/");
-          }
+          if (response.data.status === "Admin Login Successful") {
+            navigate("/adminHome");
+          } 
+          if (response.data.status === "wrong credentials!!") {
+            setErr("Invalid user credentials");
+          } 
         })
         .catch((error) => {
-          if (error.response.data === "wrong credentials!!") {
-            setErr("Invalid user credentials");
-          }
+          console.log(error)
         });
     }
   }
@@ -42,7 +44,7 @@ const LoginForm = () => {
       <div>
         <p className="text-red-600 mb-2">{err}</p>
         <label
-          for="email"
+          htmlFor="email"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Your Email
@@ -61,7 +63,7 @@ const LoginForm = () => {
 
       <div>
         <label
-          for="password"
+          htmlFor="password"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           Password
@@ -92,7 +94,7 @@ const LoginForm = () => {
             />
           </div>
           <div className="ml-3 text-sm">
-            <label for="remember" className="text-gray-500 dark:text-gray-300">
+            <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">
               Show Password
             </label>
           </div>

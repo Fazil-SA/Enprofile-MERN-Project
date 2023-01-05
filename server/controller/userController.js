@@ -22,6 +22,7 @@ const userRegister =  asyncHandler(async (req,res) => {
             }
         }  
     } catch (error) {
+        console.log(error)
         res.status(400).json({error : error.message})
     }
 })
@@ -29,9 +30,6 @@ const userRegister =  asyncHandler(async (req,res) => {
 const userLogin = asyncHandler( async(req,res) => {
     try {
         const loginData = req.body
-        if(loginData.email =='' && loginData.password == '') {
-            res.json({err:"no login data"})
-        }
         //Check for user email
         const user = await UserHelper.loginUser(loginData)
         res.status(200).json({
@@ -43,7 +41,6 @@ const userLogin = asyncHandler( async(req,res) => {
             })  
     } catch (error) {
         res.status(400).json(error.err)
-        throw new Error("Invalid Credentials")
     }
 })
 

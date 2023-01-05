@@ -6,6 +6,7 @@ const cors = require('cors')
 
 const connectToDb = require('./config/db')
 const userRouter = require('./routes/userRouter')
+const adminRouter = require('./routes/adminRouter')
 
 //express app
 const app = express()
@@ -17,6 +18,7 @@ app.use(cors())
 
 //routes
 app.use(userRouter)
+app.use(adminRouter)
 
 //db listen
 connectToDb(() => {

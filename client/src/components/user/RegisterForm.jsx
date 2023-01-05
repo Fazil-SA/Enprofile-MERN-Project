@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {useNavigate} from 'react-router-dom'
+import { axiosUserInstance } from "../../Instance/Axios";
 
 
 const RegisterForm = () => {
@@ -22,24 +23,21 @@ const RegisterForm = () => {
     if(data.password !== data.confirmPassword){
       setPwmatch(true)
     } else {
-      const response = await fetch('http://localhost:5000/register',{
-        method : "POST",
-        headers : {
-          'Content-Type' : 'application/json',
-        },
-        body : JSON.stringify(regDetails)
+      const response = await axiosUserInstance
+      .post('/register',regDetails)
+      
+      .then((response) => {
+        console.log(response.response.data.error)
+        if(response.data.status === 'user registered'){
+          navigate('/login')
+        } 
       })
-      const status = await response.json()
-      console.log(status)
-      if(status.error === 'User email already registered'){
-        setUserExist(isValidate.userExists)
-      }
-      if(status.status === 'user registered'){
-        navigate('/login')
-      } 
-      if(error.err === 'user registered'){
-        navigate('/login')
-      } 
+      .catch((error) => {
+          if(error.response.data.error === 'User email already registered'){
+            setUserExist(isValidate.userExists)
+          }
+          console.log(error)
+      })
     }
   }
   return (

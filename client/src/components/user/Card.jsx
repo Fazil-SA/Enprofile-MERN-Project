@@ -7,7 +7,7 @@ const Card = ({pricing , styles, head }) => {
       
       {pricing.map((pricing) => <div key={pricing.id}>
         <h2 className={`font-poppins font-bold xs:text-[20px] mt-4 text-[20px] leading-[21px] text-gradient uppercase ml-3 ${styles.flexCenter}`}>{pricing.title}</h2>
-        <img className={`rounded-[20px] mt-7 ${styles.flexCenter} flex justify-center h-[300px]`} src={pricing.img} alt="" />
+        <img className={`rounded-[20px] mt-7 ${styles.flexCenter} hover:scale-105 duration-100 flex justify-center h-[300px]`} src={pricing.img} alt="" />
         </div>
       )}
 

@@ -28,7 +28,7 @@ const loginUser = (loginData) => {
             if(user && (await bcrypt.compare(password, user.password))) {
                 resolve(user)
             } else {
-                reject({err:"wrong password!!"})
+                reject({err:"wrong credentials!!"})
             }
         } catch (error) {
             reject(error)
