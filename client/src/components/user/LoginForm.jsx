@@ -33,6 +33,9 @@ const LoginForm = () => {
           if (error.response.data === "wrong credentials!!") {
             setErr("Invalid user credentials");
           }
+          if (error.response.data === "user is blocked!!") {
+            setErr("user is blocked!!");
+          }
         });
     }
   }

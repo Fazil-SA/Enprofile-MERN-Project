@@ -24,7 +24,19 @@ const userCrud = asyncHandler(async (req,res) => {
     }
 }) 
 
+const blockUserStatus = asyncHandler(async (req,res) => {
+    try {
+        const id = req.body
+        const updateData = await AdminHelpers.blockStatus(id)
+        res.status(200).json({isActive : 'status updated'})
+    } catch (error) {
+        console.log(error)
+    }
+}) 
+
+
 module.exports = {
     adminLogin,
-    userCrud
+    userCrud,
+    blockUserStatus
 }

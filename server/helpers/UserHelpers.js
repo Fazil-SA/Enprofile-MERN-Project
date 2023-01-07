@@ -26,7 +26,11 @@ const loginUser = (loginData) => {
             const {email,password} = loginData
             const user = await RegisterUser.findOne({email})
             if(user && (await bcrypt.compare(password, user.password))) {
-                resolve(user)
+                if(user.active){
+                    resolve(user)
+                } else {
+                    reject({err:"user is blocked!!"})
+                }
             } else {
                 reject({err:"wrong credentials!!"})
             }

@@ -31,9 +31,29 @@ const getUsers = () => {
     })
 }
 
+const blockStatus = (id) => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const userId = id.data
+            const user = await User.findById(userId)
+            // console.log(user)
+            if(user.active){
+                const blockUser = await User.findByIdAndUpdate(id.data,{active:false})
+                resolve(blockUser)
+            } else {
+                const blockUser = await User.findByIdAndUpdate(id.data,{active:true})
+                resolve(blockUser)
+            }
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     findAdmin,
-    getUsers
+    getUsers,
+    blockStatus
 }
 
 
