@@ -27,7 +27,7 @@ const LoginForm = () => {
         .post("/adminLogin",data)
         .then((response) => {
           if (response.data.status === "Admin Login Successful") {
-            navigate("/adminHome");
+            navigate("/admin/dashboard");
           } 
           if (response.data.status === "wrong credentials!!") {
             setErr("Invalid user credentials");

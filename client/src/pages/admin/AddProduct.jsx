@@ -6,7 +6,7 @@ const ProductManagement = () => {
   return (
     <>
       <NavBar />
-      <ProductCrud />
+      <AddProduct />
     </>
   )
 }

@@ -107,22 +107,22 @@ export default function MiniDrawer() {
   };
 
   const menuItems = [{
-    path : '/adminHome',
+    path : '/admin/dashboard',
     title : 'Home',
     img : <InboxIcon />
   },
   {
-    path : '/adminHome/userManagement',
+    path : '/admin/userManagement',
     title : 'Users',
     img : <Person />
   },
   {
-    path : '/adminHome/productManagement',
+    path : '/admin/productManagement',
     title : 'Products',
     img : <Category />
   },
   {
-    path : '/adminHome/orderManagement',
+    path : '/admin/orderManagement',
     title : 'Orders',
     img : <MailIcon />
   }]
