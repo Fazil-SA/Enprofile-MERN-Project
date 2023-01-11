@@ -1,6 +1,14 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const AdminHelpers = require('../helpers/AdminHelpers')
+require('dotenv').config()
+// import cloudinary from "cloudinary/lib/cloudinary";
+const cloudinary = require('cloudinary')
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+  });
 
 const asyncHandler = require('express-async-handler')
 
@@ -11,7 +19,6 @@ const adminLogin = asyncHandler(async (req,res) => {
         res.status(200).json({status:'Admin Login Successful'})
     } catch (error) {
         res.json({status:'wrong credentials!!'})
-
     }
 })
 
@@ -43,9 +50,21 @@ const addProduct = asyncHandler(async (req,res) => {
     }
 })
 
+const imgRemove = asyncHandler(async (req,res) => {
+    try {
+        const publicId = req.body.clPublicId
+        cloudinary.v2.uploader.destroy(publicId, function(error,result) {
+            console.log(result, error) })
+            res.json({status:'img removed'})
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 module.exports = {
     adminLogin,
     userCrud,
     blockUserStatus,
-    addProduct
+    addProduct,
+    imgRemove
 }
