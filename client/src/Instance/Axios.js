@@ -1,13 +1,14 @@
-import axios from 'axios'
+import Axios from 'axios'
 
-export const axiosUserInstance = axios.create({
+export const axiosUserInstance = Axios.create({
     baseURL: "http://localhost:5000"
 })
 
-export const axiosAdminInstance = axios.create({
+export const axiosAdminInstance = Axios.create({
     baseURL: "http://localhost:5000"
 })
 
-export const axiosUserCrudInstance = axios.create({
+export const axiosUserCrudInstance = Axios.create({
     baseURL: "http://localhost:5000"
 })
+

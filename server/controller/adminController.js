@@ -34,9 +34,18 @@ const blockUserStatus = asyncHandler(async (req,res) => {
     }
 }) 
 
+const addProduct = asyncHandler(async (req,res) => {
+    try {
+        const data = req.body
+        console.log(data);
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 module.exports = {
     adminLogin,
     userCrud,
-    blockUserStatus
+    blockUserStatus,
+    addProduct
 }

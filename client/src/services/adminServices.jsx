@@ -1,4 +1,10 @@
-// import { axiosUserCrudInstance } from "../../Instance/Axios";
+
+// import { axiosAdminInstance } from "../../Instance/Axios";
+
+// async function addProduct(event,data) {
+//     event.preventDefault();
+//     console.log(data)
+// }
 
 // async function blockUser(id) {
 //     console.log(id)
@@ -10,5 +16,6 @@
 // }
 
 // export {
-//     blockUser
+//     addProduct
 // }
+

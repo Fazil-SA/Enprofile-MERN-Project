@@ -16,28 +16,28 @@ const LoginForm = () => {
     wrongPw: "wrong password!!",
   };
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+    async function handleSubmit(event) {
+      event.preventDefault();
 
-    if (!email || !password) {
-      setErr("All fields are required");
-    } else {
-      const data = { email: email, password: password }
-      const response = await axiosAdminInstance
-        .post("/adminLogin",data)
-        .then((response) => {
-          if (response.data.status === "Admin Login Successful") {
-            navigate("/admin/dashboard");
-          } 
-          if (response.data.status === "wrong credentials!!") {
-            setErr("Invalid user credentials");
-          } 
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      if (!email || !password) {
+        setErr("All fields are required");
+      } else {
+        const data = { email: email, password: password }
+        const response = await axiosAdminInstance
+          .post("/adminLogin",data)
+          .then((response) => {
+            if (response.data.status === "Admin Login Successful") {
+              navigate("/admin/dashboard");
+            } 
+            if (response.data.status === "wrong credentials!!") {
+              setErr("Invalid user credentials");
+            } 
+          })
+          .catch((error) => {
+            console.log(error)
+          });
+      }
     }
-  }
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>
