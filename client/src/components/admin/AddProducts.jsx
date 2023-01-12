@@ -13,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate , useLocation } from 'react-router-dom';
 
 const AddProduct = () => {
 
@@ -24,13 +25,22 @@ const AddProduct = () => {
         ...theme.mixins.toolbar,
       }));
 
-    const [tempName, setTempName] = useState('');
-    const [category, setCategory] = useState('');
+    const navigate = useNavigate()
+    const location = useLocation()
+    const updateProduct = location.state
+
+    const [tempName, setTempName] = useState(updateProduct ? updateProduct.name : '');
+    const [category, setCategory] = useState(updateProduct ? updateProduct.category : '');
     const [selectedImages, setSelectedImages] = useState([])
-    const [imageDisplayUrl, setImageDisplayUrl] = useState('')
-    const [url, setUrl] = useState('')
+    const [imageDisplayUrl, setImageDisplayUrl] = useState(updateProduct ? updateProduct.imageUrl : '')
+    const [url, setUrl] = useState(updateProduct ? updateProduct.redirectUrl : '')
     const [loading,setLoading] = useState('')
     const [clPublicId,setClPublicId] = useState('')
+
+
+    
+
+
 
     const uploadImage = () => {
         console.log(selectedImages)
@@ -83,13 +93,45 @@ const AddProduct = () => {
                 const response = await axiosAdminInstance
                 .post('/admin/addProduct',data)
                 .then((response) => {
-                    console.log(response);
+                    if(response.data.status == 'product added') {
+                        toast.success("Product Added Successfully!", {
+                            theme: "colored",
+                            autoClose: 3000,
+                        })
+                    }
+                }).catch((err) => {
+                    console.log(err)
                 })
             }
         } catch (error) {
             console.log(error)
         }
     }
+
+    async function editProduct(id) {
+        try {
+          const name = tempName
+          const redirectUrl = url
+          const data = {id,name,category,imageDisplayUrl,redirectUrl}
+          const response = await axiosAdminInstance
+          .post('/admin/updateProduct',data)
+          .then((response) => {
+            console.log(response.data.status)
+            if(response.data.status == 'updated'){
+                navigate('/admin/productManagement')
+                setTimeout(function () { toast.success("Product Updated Successfully!", {
+                    theme: "colored",
+                    autoClose: 2000,
+                })});
+            }
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+        } catch (error) {
+          console.log(error)
+        }
+      }
   return (
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 3 ,ml:{xs: 8,md:14} , mr:{xs:2,md:8} }}>
@@ -110,6 +152,8 @@ const AddProduct = () => {
 
                 </Grid>
                 <Grid item>
+                <ToastContainer />
+
                     <Button variant="outlined" fullWidth label="fullWidth" id="fullWidth" component="label" startIcon={<PhotoCamera />} sx={{color:'black',borderColor: 'grey.500'}}>
                         Select Cover Image
                         <input
@@ -143,7 +187,11 @@ const AddProduct = () => {
                 </Grid>
                 <Grid item>
                     <TextField value={url} onChange={(e)=>setUrl(e.target.value)} fullWidth label="Template URL" id="fullWidth" variant="outlined" />
+                    {!updateProduct ?
                     <Button type='submit' onClick={addProduct} variant="contained" sx={{mt: 4}}>Add Template</Button>
+                    :
+                    <Button type='submit' onClick={() => editProduct(updateProduct._id)} variant="contained" sx={{mt: 4}}>Update</Button>
+                    }
                 </Grid>
             </Grid>
         </div>

@@ -1,43 +1,73 @@
 import { Box, Typography } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles';
 import { DataGrid } from '@mui/x-data-grid';
-import { axiosUserCrudInstance } from "../../Instance/Axios";
+import { axiosAdminInstance } from "../../Instance/Axios";
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
-
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { ToastContainer, toast } from 'react-toastify';
 // import { blockUser } from '../../services/adminServices'; 
 
-const Home = () => {
+const ProductCrud = () => {
 
-  const [userDetails,setUserDetails] = useState([]);
+  const [productDetails,setProductDetails] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAllUsers()
-    async function getAllUsers() {
-      const response = await axiosUserCrudInstance
-      .post('/admin/userCrud')
+    getAllProducts()
+    async function getAllProducts() {
+      const response = await axiosAdminInstance
+      .post('/admin/productCrud')
       
       .then((response) => {
-        setUserDetails(response.data)
+        setProductDetails(response.data)
       })
       .catch((error) => {
           console.log(error)
       })
     }
     
-  }, [userDetails]);
+  }, [productDetails]);
 
-  async function blockUser(id) {
-    console.log(id)
-    const data = id
-    const response = await axiosUserCrudInstance
-    .put('/admin/userCrud',{data})
-    .then((response) => {
-        console.log(response)
-    })
-}
+    async function deleteProduct(id) {
+      try {
+          const prodId = id
+          console.log(prodId)
+          const result = await axiosAdminInstance
+          .post('/admin/deleteProduct',{prodId})
+          .then((response) => {
+            toast.success("Templated Removed Successfully!", {
+              theme: "colored",
+              autoClose: 3000,
+            })
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    async function editProduct(id) {
+      try {
+        const prodId = id
+        const response = await axiosAdminInstance
+        .post('/admin/editProduct',{prodId})
+        .then((response) => {
+          const updateProduct = response.data
+          navigate('/admin/addProduct',{state:updateProduct})
+          // console.log(response.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
     const DrawerHeader = styled('div')(({ theme }) => ({
         display: 'flex',
@@ -51,43 +81,19 @@ const Home = () => {
       // {console.log(userDetails)}
       const columns = [
         { field: "_id", headerName: "ID", width: 180 },
-        { field: "userName", headerName: "Name", width: 150 },
-        { field: "mobile", headerName: "Mobile", width: 130 },
-        { field: "email", headerName: "Email", width: 200 },
-        { field: "createdAt", headerName: "Account Created Date", width: 180 },
-        { field: "active", headerName: "User Active", width: 100 },
+        { field: "name", headerName: "Name", width: 150 },
+        { field: "category", headerName: "Category", width: 130 },
+        { field: "imageUrl", headerName: "Image Url", width: 200 },
+        { field: "redirectUrl", headerName: "Redirect Url", width: 180 },
         {
-          field: "actions",headerName: "Block/UnBlock",width:200,
-          renderCell: (userDetails) => {
+          field: "actions",headerName: "Action",width:200,
+          renderCell: (productDetails) => {
             
             return (
               <>
-              {/* {console.log(userDetails.row.active)} */}
-              {userDetails.row.active ? (
-                  <Button
-                    variant="contained"
-                    color="error"
-                    size="small"
-                    style={{ marginLeft: 16 }}
-                    onClick={() => {
-                      blockUser(userDetails.row._id);
-                    }}
-                    >Block
-                  </Button> ) : (
-                    <Button
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    style={{ marginLeft: 16 }}
-                    onClick={() => {
-                      blockUser(userDetails.row._id);
-                    }}
-                    >UnBlock
-                  </Button>
-                  )
-                }
-
-                </>
+                  <EditIcon sx={{cursor:'pointer'}} onClick={() => editProduct(productDetails.id)}/>
+                  <DeleteIcon sx={{cursor:'pointer'}} onClick={() => deleteProduct(productDetails.id)}/>
+              </>
               
             );
                 }}
@@ -101,10 +107,11 @@ const Home = () => {
         <DrawerHeader />
         <Typography variant='h6' className='flex justify-center font-extrabold'>Product Management Page</Typography>
         <Button variant="contained" onClick={() => navigate('/admin/addProduct')} sx={{m:2 , borderRadius:4}} >Add Template</Button>
+        <ToastContainer />
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
-          getRowId={(row) => row?.email}
-          rows={userDetails}
+          getRowId={(row) => row?._id}
+          rows={productDetails}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}
@@ -117,4 +124,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default ProductCrud

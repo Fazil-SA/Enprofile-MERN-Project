@@ -44,7 +44,8 @@ const blockUserStatus = asyncHandler(async (req,res) => {
 const addProduct = asyncHandler(async (req,res) => {
     try {
         const data = req.body
-        console.log(data);
+        const addProduct = await AdminHelpers.addProduct(data)
+        res.status(200).json({status:"product added"})
     } catch (error) {
         console.log(error);
     }
@@ -61,10 +62,54 @@ const imgRemove = asyncHandler(async (req,res) => {
     }
 })
 
+const getAllProducts = asyncHandler(async (req,res) => {
+    try {
+        const allProducts = await AdminHelpers.getAllProducts()
+        res.status(200).json(allProducts)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+const deleteProduct = asyncHandler(async (req,res) => {
+    try {
+        const prodId = req.body
+        const deleted = await AdminHelpers.deleteProduct(prodId)
+        res.status(200).json(deleted)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+const editProduct = asyncHandler(async (req,res) => {
+    try {
+        const prodId = req.body
+        const editProd = await AdminHelpers.editProduct(prodId)
+        res.status(200).json(editProd)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+const updateProduct = asyncHandler(async (req,res) => {
+    try {
+        const data = req.body
+        const updateProd = await AdminHelpers.updateProduct(data)
+        res.status(200).json({status:'updated'})
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 module.exports = {
     adminLogin,
     userCrud,
     blockUserStatus,
     addProduct,
-    imgRemove
+    imgRemove,
+    getAllProducts,
+    deleteProduct,
+    editProduct,
+    updateProduct
 }
