@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const RegisterUser = require('../models/userSchema')
+const Products = require('../models/productSchema')
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 
@@ -64,8 +65,45 @@ const findUser = (userData) => {
     })
 }
 
+const portfolioTemplates = () => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const portfolio = await Products.find({category:'portfolio'})
+            resolve(portfolio)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+const ecommerceTemplates = () => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const ecommerce = await Products.find({category:'ecommerce'})
+            resolve(ecommerce)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+const landingTemplates = () => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const landing = await Products.find({category:'landingpage'})
+            resolve(landing)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+
 module.exports = {
     createUser,
     loginUser,
-    findUser
+    findUser,
+    portfolioTemplates,
+    ecommerceTemplates,
+    landingTemplates
 }

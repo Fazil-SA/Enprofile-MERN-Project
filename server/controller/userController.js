@@ -48,7 +48,19 @@ const generateToken = (id) => {
     return jwt.sign({ id } , process.env.JWT_SECRET , {expiresIn: '30d'})
 }
 
+const getProductsByCategory = asyncHandler(async (req,res) => {
+    try {
+        const portfolio = await UserHelper.portfolioTemplates()
+        const ecommerce = await UserHelper.ecommerceTemplates()
+        const landing = await UserHelper.landingTemplates()
+        res.status(200).json([portfolio,ecommerce,landing])
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 module.exports = {
     userRegister,
     userLogin,
+    getProductsByCategory
 }

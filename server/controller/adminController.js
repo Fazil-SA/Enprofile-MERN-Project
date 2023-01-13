@@ -102,6 +102,8 @@ const updateProduct = asyncHandler(async (req,res) => {
     }
 })
 
+
+
 module.exports = {
     adminLogin,
     userCrud,
@@ -111,5 +113,5 @@ module.exports = {
     getAllProducts,
     deleteProduct,
     editProduct,
-    updateProduct
+    updateProduct,
 }
