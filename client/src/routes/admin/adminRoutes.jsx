@@ -8,7 +8,6 @@ import AddProduct from '../../pages/admin/AddProduct'
 
 const adminRoutes = () =>  (
         <Routes>
-    
             <Route path='/admin/login' element={<Login />} />
             <Route path='/admin/dashboard' element={<AdminHome />} />
             <Route path='/admin/userManagement' element={<UserManagement />} />
