@@ -16,8 +16,8 @@ const PortTempDemo1 = () => {
       <Home />
       <SocialLinks />
       <About />
-      <Portfolio />
-      <Experience />
+      {/* <Portfolio /> */}
+      {/* <Experience /> */}
       <Contact />
     </div>
   )

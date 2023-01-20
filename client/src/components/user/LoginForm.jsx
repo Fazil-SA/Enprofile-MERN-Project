@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { axiosUserInstance } from "../../Instance/Axios";
+import { useDispatch, useSelector } from "react-redux";
+import { userToken } from "../../redux/authSlice";
 
 const LoginForm = () => {
   const [isVisible, setVisible] = useState(false);
@@ -10,12 +12,13 @@ const LoginForm = () => {
   const [err, setErr] = useState("");
   const navigate = useNavigate();
 
+  const Dispatch = useDispatch()
   //validation-form
   const isValidate = {
     required: "*This field is required",
     wrongPw: "wrong password!!",
   };
-
+  
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -26,10 +29,14 @@ const LoginForm = () => {
         .post("/login", { email: email, password: password })
         .then((response) => {
           if (response.data.status === "User Logined Successfully") {
+            // console.log(response.data.token)
+            const userJsonToken = response.data.token
+            Dispatch(userToken(userJsonToken))
             navigate("/");
           }
         })
         .catch((error) => {
+          console.log(error)
           if (error.response.data === "wrong credentials!!") {
             setErr("Invalid user credentials");
           }
@@ -39,6 +46,9 @@ const LoginForm = () => {
         });
     }
   }
+
+  // const userd = useSelector((state) => state.authSlice.userToken)
+  // console.log(userd)
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit}>

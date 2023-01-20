@@ -135,6 +135,8 @@ const AddProduct = () => {
   return (
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 3 ,ml:{xs: 8,md:14} , mr:{xs:2,md:8} }}>
+    {/* <Box component="main" sx={{ flexGrow: 1, p: 10  ,justifyContent:'center',justifyItems:'center' }}> */}
+
         <DrawerHeader />
         <Typography variant='h6' className='flex justify-center font-extrabold'>Product Management Page</Typography>
         <div style={{ height: 400, width: '100%' }}>
@@ -165,6 +167,7 @@ const AddProduct = () => {
                         />
                     </Button>
                     <Image style={{width:75}} cloudName="dk4uips8d" publicId={imageDisplayUrl} />
+                    
                     {
                      imageDisplayUrl ? 
                      <>

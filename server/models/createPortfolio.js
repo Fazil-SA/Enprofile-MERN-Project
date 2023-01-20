@@ -22,19 +22,12 @@ const createPortfolio = new Schema({
         type : String,
         required : true
     },
-    works : [{
-        projectLink : {type : String},
-        githubLink : {type : String},
-        coverImageUrl : {type : String}
-    }],
-    experience : [{
-        title : {type : String},
-        iconImageUrl : {type : String}
-    }],
-    contact : [{
-        email : {type : String},
-        phone : {type : String}
-    }]
+    linkedin : {type : String},
+    github : {type : String},
+    email : {type : String},
+    contact : {type : String},
+    portfolioUrl : {type : String}
+
 })
 
 module.exports = mongoose.model('Portfolio',createPortfolio)

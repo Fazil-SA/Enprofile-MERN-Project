@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const RegisterUser = require('../models/userSchema')
 const Products = require('../models/productSchema')
+const Portfolio = require('../models/createPortfolio')
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 
@@ -98,6 +99,17 @@ const landingTemplates = () => {
     })
 }
 
+const createPortfolioNewUser = (portfolioCreationData) => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const portUrl = await Portfolio.create(portfolioCreationData)
+            resolve(portUrl)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 
 module.exports = {
     createUser,
@@ -105,5 +117,6 @@ module.exports = {
     findUser,
     portfolioTemplates,
     ecommerceTemplates,
-    landingTemplates
+    landingTemplates,
+    createPortfolioNewUser
 }

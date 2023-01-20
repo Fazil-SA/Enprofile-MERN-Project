@@ -9,7 +9,9 @@ const userRoutes = () =>  (
             <Route path='/register' element={<Register />} />
             <Route path='/' element={<Home />} />
             <Route path='/portfolio-demo-1' element={<PortTempDemo1 />} />
-            <Route path='/create-your-portfolio' element={<SelectPortfolio />} />
+            <Route path='/create-your-portfolio' element={<SelectPortfolio />} />            
+            {/* <Route path='/create-your' element={<SelectPortfolio1 />} /> */}
+
 
         </Routes>
     
