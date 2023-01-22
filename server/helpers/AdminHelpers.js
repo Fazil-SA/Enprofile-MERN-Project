@@ -15,6 +15,13 @@ const findAdmin = (loginData) => {
             } else {
                 reject({err:"wrong credentials!!"})
             }
+
+            // const salt = await bcrypt.genSalt(10)
+            // const hashedPassword = await bcrypt.hash(password, salt)
+            // Admin.create({
+            //     email:email,
+            //     password:hashedPassword
+            // })
         } catch (error) {
             reject(error)
         }

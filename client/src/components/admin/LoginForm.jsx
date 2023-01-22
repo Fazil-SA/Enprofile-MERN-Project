@@ -26,6 +26,7 @@ const LoginForm = () => {
         const response = await axiosAdminInstance
           .post("/adminLogin",data)
           .then((response) => {
+            console.log(response)
             if (response.data.status === "Admin Login Successful") {
               navigate("/admin/dashboard");
             } 

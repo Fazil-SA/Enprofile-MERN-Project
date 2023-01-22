@@ -16,7 +16,7 @@ const adminLogin = asyncHandler(async (req,res) => {
     try {
         const loginData = req.body
         const adminExists = await AdminHelpers.findAdmin(loginData)
-        res.status(200).json({status:'Admin Login Successful',token : generateToken(admin._id)})
+        res.status(200).json({status:'Admin Login Successful',token : generateToken(adminExists._id)})
     } catch (error) {
         res.json({status:'wrong credentials!!'})
     }
@@ -33,7 +33,7 @@ const userCrud = asyncHandler(async (req,res) => {
     } catch (error) {
         console.log(error)
     }
-}) 
+})
 
 const blockUserStatus = asyncHandler(async (req,res) => {
     try {
