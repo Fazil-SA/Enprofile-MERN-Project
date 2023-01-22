@@ -11,7 +11,7 @@ router.post('/login', userLogin)
 
 router.post('/user/templateCards',getProductsByCategory)
 
-router.post('/create-portfolio-user-data-upload',portfolioCreation)
+router.post('/create-portfolio-user-data-upload', protect, portfolioCreation)
 
 router.get('/me',(req,res)=>{
     res.json({message :'hello'})

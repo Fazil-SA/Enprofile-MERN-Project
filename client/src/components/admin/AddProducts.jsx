@@ -31,6 +31,7 @@ const AddProduct = () => {
 
     const [tempName, setTempName] = useState(updateProduct ? updateProduct.name : '');
     const [category, setCategory] = useState(updateProduct ? updateProduct.category : '');
+    const [price, setPrice] = useState(updateProduct ? updateProduct.price : '');
     const [selectedImages, setSelectedImages] = useState([])
     const [imageDisplayUrl, setImageDisplayUrl] = useState(updateProduct ? updateProduct.imageUrl : '')
     const [url, setUrl] = useState(updateProduct ? updateProduct.redirectUrl : '')
@@ -89,7 +90,7 @@ const AddProduct = () => {
                 })
             } else {
 
-                const data = {tempName,category,imageDisplayUrl,url}
+                const data = {tempName,category,price,imageDisplayUrl,url}
                 const response = await axiosAdminInstance
                 .post('/admin/addProduct',data)
                 .then((response) => {
@@ -98,6 +99,9 @@ const AddProduct = () => {
                             theme: "colored",
                             autoClose: 3000,
                         })
+                        setTimeout(() => {
+                            navigate('/admin/productManagement')
+                        }, 1000);
                     }
                 }).catch((err) => {
                     console.log(err)
@@ -152,6 +156,9 @@ const AddProduct = () => {
                         <MenuItem value='landingpage'>Landing Page</MenuItem>
                     </TextField>
 
+                </Grid>
+                <Grid item>
+                    <TextField fullWidth id="fullWidth" value={price} onChange={(e)=>setPrice(e.target.value)} label="Template Price" variant="outlined" />
                 </Grid>
                 <Grid item>
                 <ToastContainer />

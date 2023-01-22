@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
 import { axiosUserInstance } from "../../../Instance/Axios";
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const selectPortfolio = () => {
 
@@ -20,16 +21,23 @@ const selectPortfolio = () => {
 
     const navigate = useNavigate()
 
-
+    const token = useSelector((state) => state.authSlice.userToken)
 
     const onFinish = (values) => {
         values.coverImageUrl = imageDisplayUrl
         portfolioCreation()
         async function portfolioCreation() {
-
+            const config = {
+                headers: {
+                  Accept: 'application/json',
+                  Authorization: token,
+                  'Content-Type': 'application/json',
+                  data : values
+                },
+              };
         try {
             const response = await axiosUserInstance
-            .post('/create-portfolio-user-data-upload',values)
+            .post('/create-portfolio-user-data-upload',config)
             .then((response) => {
                 if(response.data.status == 'url generated'){
                     navigate(`/${response.data.portUrl}`)

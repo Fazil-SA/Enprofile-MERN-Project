@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const Card = ({data , styles, head }) => {
 const navigate = useNavigate()
 
-// console.log(data)
+console.log(data)
   return (
     <section className={`flex justify-center items-center sm:justify-between flex-row flex-wrap sm:mb-20 mb-6`}>
         <p className={`${styles.heading3} ${styles.flexCenter} `}>{head}</p>

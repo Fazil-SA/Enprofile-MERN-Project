@@ -56,6 +56,7 @@ const addProduct = (data) => {
             const newProduct = await Product.create({
                 name:data.tempName,
                 category:data.category,
+                price:data.price,
                 imageUrl:data.imageDisplayUrl,
                 redirectUrl:data.url
             })

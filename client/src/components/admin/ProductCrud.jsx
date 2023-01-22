@@ -83,6 +83,7 @@ const ProductCrud = () => {
         { field: "_id", headerName: "ID", width: 180 },
         { field: "name", headerName: "Name", width: 150 },
         { field: "category", headerName: "Category", width: 130 },
+        { field: "price", headerName: "Price", width: 130 },
         { field: "imageUrl", headerName: "Image Url", width: 200 },
         { field: "redirectUrl", headerName: "Redirect Url", width: 180 },
         {

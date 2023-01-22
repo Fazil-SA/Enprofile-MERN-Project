@@ -2,15 +2,23 @@ import React from 'react'
 import { useState } from 'react'
 import { close,logo,menu } from '../../assets/user/index'
 import { navLinks } from '../../constants/user/index'
+import { useSelector, useDispatch } from 'react-redux'
+import { clearUserToken } from '../../redux/authSlice'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NavBar = () => {
   const [toggle, setToggle] = useState(false)
-
+  const token = useSelector((state) => state.authSlice.userToken)
+  const navigate = useNavigate()
+  const Dispatch = useDispatch()
   return (
     <nav className='w-full flex py-6 justify-between items-start navbar'>
       <a href="/">
         <img src={logo} alt="Enprofile" className='w-[150px] h-[35px] cursor-pointer' />
       </a>
+      <ToastContainer/>
 
       <ul className='list-none md:flex hidden justify-end items-center flex-1'>
         {navLinks.map((nav,index) => {
@@ -20,8 +28,13 @@ const NavBar = () => {
             </a>
           </li>
         })}
-        <button className={`font-poppins cursor-pointer text-[16px] text-white mb-4 bg-[#13353a] hover:bg-[#0a282c] font-bold py-2 px-4 rounded-full`}>
-        Login / Register
+        <button onClick={() => { 
+                token ? Dispatch((clearUserToken())) && toast.error("User has been logged out!!", {
+                  theme: "colored",
+                  autoClose: 3000,
+              }) : navigate('/login')
+              }} className={`font-poppins cursor-pointer text-[16px] text-white mb-4 bg-[#13353a] hover:bg-[#0a282c] font-bold py-2 px-4 rounded-full`}>
+          {token ? 'Logout' : 'Login / Register'} 
         </button>
       </ul>
       <div className='md:hidden flex flex-1 justify-end items-center'>
@@ -39,8 +52,13 @@ const NavBar = () => {
                   </a>
                 </li>
               })}
-              <button className={`font-poppins cursor-pointer text-[16px] text-white mb-4 bg-[#13353a] hover:bg-[#0a282c] font-bold py-2 px-4 rounded-md`}>
-              Login / Register
+              <button onClick={() => {
+                token ? Dispatch((clearUserToken())) && toast.error("User has been logged out!!", {
+                  theme: "colored",
+                  autoClose: 3000,
+              }) : navigate('/login')
+              }} className={`font-poppins cursor-pointer text-[16px] text-white mb-4 bg-[#13353a] hover:bg-[#0a282c] font-bold py-2 px-4 rounded-md`}>
+              {token ? 'Logout' : 'Login / Register'} 
             </button>
             </ul>
         </div>

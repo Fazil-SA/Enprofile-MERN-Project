@@ -12,7 +12,6 @@ import {Business,
 import { pricing , templates , feedback } from '../../constants/user/index'
 import { axiosAdminInstance } from '../../Instance/Axios';
 
-
 const Home = () => {
 
   const [portfolioTemp, setPortfolioTemp] = useState();
@@ -25,27 +24,27 @@ const Home = () => {
       try {
         const response = await axiosAdminInstance
         .post('/user/templateCards')
-          .then((response) => {
-            setPortfolioTemp(response.data[0] || '')
-            setEcommerceTemp(response.data[1] || '')
-            setLandingTemp(response.data[2] || '')
-          })
-          .catch((err) => {
-            console.log(err)
-          })
+        .then((response) => {
+          setPortfolioTemp(response.data[0] || '')
+          setEcommerceTemp(response.data[1] || '')
+          setLandingTemp(response.data[2] || '')
+        })
+        .catch((err) => {
+          console.log(err)
+        })
       } catch (error) {
         console.log(error)
       }
     }
   },[]);
-
+  
 
   return (
     <>
     <div className='bg-primary w-full overflow-hidden'>
       <div className={`${styles.paddingX} ${styles.flexCenter}`}>
         <div className={`${styles.boxWidth} text-white`}>
-          <NavBar />
+          <NavBar/>
         </div>
       </div>
 

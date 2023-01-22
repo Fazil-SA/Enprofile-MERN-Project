@@ -16,11 +16,15 @@ const adminLogin = asyncHandler(async (req,res) => {
     try {
         const loginData = req.body
         const adminExists = await AdminHelpers.findAdmin(loginData)
-        res.status(200).json({status:'Admin Login Successful'})
+        res.status(200).json({status:'Admin Login Successful',token : generateToken(admin._id)})
     } catch (error) {
         res.json({status:'wrong credentials!!'})
     }
 })
+
+const generateToken = (id) => {
+    return jwt.sign({ id } , process.env.JWT_SECRET , {expiresIn: '30d'})
+}
 
 const userCrud = asyncHandler(async (req,res) => {
     try {
