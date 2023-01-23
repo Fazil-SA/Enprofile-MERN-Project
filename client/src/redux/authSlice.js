@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   adminDetails: '',
   userAllDetails:'',
   userToken:'',
+  adminToken:''
 };
 
 
@@ -67,6 +68,16 @@ const loginSlice = createSlice({
         let{userToken}=state;
         userToken=false;
         return{...state,userToken}
+      },
+      adminToken:(state,action)=>{
+        let {adminToken}=state;
+        adminToken=action.payload
+        return {...state,adminToken}
+      },
+      clearAdminToken:(state,action)=>{
+        let{adminToken}=state;
+        adminToken=false;
+        return{...state,adminToken}
       }, 
     },
   });
@@ -83,6 +94,8 @@ const loginSlice = createSlice({
     userToken,
     clearUserToken,
     categoryDetails,
+    adminToken,
+    clearAdminToken,
   } = loginSlice.actions;
   
 

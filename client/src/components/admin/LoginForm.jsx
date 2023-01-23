@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { axiosAdminInstance } from "../../Instance/Axios";
+import { useDispatch } from "react-redux"
+import { adminToken } from "../../redux/authSlice";
 
 const LoginForm = () => {
   const [isVisible, setVisible] = useState(false);
@@ -10,6 +12,7 @@ const LoginForm = () => {
   const [err, setErr] = useState("");
   const navigate = useNavigate();
 
+  const dispatch = useDispatch()
   //validation-form
   const isValidate = {
     required: "*This field is required",
@@ -26,7 +29,9 @@ const LoginForm = () => {
         const response = await axiosAdminInstance
           .post("/adminLogin",data)
           .then((response) => {
-            console.log(response)
+            const adminJsonToken = response.data.token
+            dispatch(adminToken(adminJsonToken))
+
             if (response.data.status === "Admin Login Successful") {
               navigate("/admin/dashboard");
             } 

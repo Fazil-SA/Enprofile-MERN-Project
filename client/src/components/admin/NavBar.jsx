@@ -21,11 +21,15 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import Person from '@mui/icons-material/Person';
 import MailIcon from '@mui/icons-material/Mail';
+import LogoutIcon from '@mui/icons-material/Logout';
 import Category from '@mui/icons-material/Category';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Logout from '@mui/icons-material/Logout';
+import { useDispatch } from 'react-redux';
+import { clearAdminToken } from '../../redux/authSlice';
+
 
 const drawerWidth = 240;
-
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -125,8 +129,15 @@ export default function MiniDrawer() {
     path : '/admin/orderManagement',
     title : 'Orders',
     img : <MailIcon />
-  }]
+  },
+]
 
+const Dispatch = useDispatch()
+function logoutBtn() {
+navigate('/admin/login')
+Dispatch((clearAdminToken()))
+  // dispatch(clearAdminToken())
+}
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -175,11 +186,30 @@ export default function MiniDrawer() {
                 >
                   {element.img}
                 </ListItemIcon>
-                
                 <ListItemText primary={element.title} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
+
+          <ListItemButton onClick={logoutBtn}
+            sx={{
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary='Logout' sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
+
         </List>
       </Drawer>
       

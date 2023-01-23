@@ -2,7 +2,6 @@ import { Box, Typography } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles';
 
 import React from 'react'
-
 const Home = () => {
     const DrawerHeader = styled('div')(({ theme }) => ({
         display: 'flex',
