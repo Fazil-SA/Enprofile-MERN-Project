@@ -61,9 +61,9 @@ const getProductsByCategory = asyncHandler(async (req,res) => {
 
 const portfolioCreation = asyncHandler(async (req,res) => {
     try {
-        const portfolioCreationData = req.body
-        console.log(portfolioCreationData)
-        const response = await UserHelper.createPortfolioNewUser(portfolioCreationData)
+        const portfolioCreationData = req.body.headers.data
+        const user = req.user
+        const response = await UserHelper.createPortfolioNewUser({portfolioCreationData,user})
         res.status(200).json({status:'url generated',portUrl : response.portfolioUrl})
     } catch (error) {
         console.log(error)

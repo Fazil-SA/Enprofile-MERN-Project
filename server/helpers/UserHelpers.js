@@ -99,10 +99,10 @@ const landingTemplates = () => {
     })
 }
 
-const createPortfolioNewUser = (portfolioCreationData) => {
+const createPortfolioNewUser = (data) => {
     return new Promise(async (resolve,reject) => {
         try {
-            const portUrl = await Portfolio.create(portfolioCreationData)
+            const portUrl = await Portfolio.create({portfolioDetails:data.portfolioCreationData,user:data.user})
             resolve(portUrl)
         } catch (error) {
             reject(error)
