@@ -9,7 +9,7 @@ import {Image} from 'cloudinary-react'
 import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
 import { axiosUserInstance } from "../../../Instance/Axios";
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const selectPortfolio = () => {
@@ -20,8 +20,12 @@ const selectPortfolio = () => {
     const [clPublicId,setClPublicId] = useState('')
 
     const navigate = useNavigate()
+    const location = useLocation()
+    const templateDetails = location.state
+    // console.log(templateDetails)
 
     const token = useSelector((state) => state.authSlice.userToken)
+
     const onFinish = (values) => {
         values.coverImageUrl = imageDisplayUrl
         portfolioCreation()
@@ -31,20 +35,17 @@ const selectPortfolio = () => {
                   "Accept": 'application/json',
                   "Authorization": token,
                   "Content-Type": 'application/json',
-                  "data" : values
+                  "data" : values,
+                  "purchasedTemplate" : templateDetails
                 },
               };
         try {
             const response = await axiosUserInstance
             .post('/create-portfolio-user-data-upload',config)
             .then((response) => {
-                if(response.data.status == 'url generated'){
-                    console.log('yes')
-                    // navigate(`/${response.data.portUrl}`)
+                if(response.data.url){
+                    window.location.replace(response.data.url)    
                 }
-                // console.log(response.data.status)
-                // console.log(response.data.portUrl)
-                // console.log(response)
             })
             .catch((err) => {
                 console.log(err)
@@ -164,6 +165,8 @@ const selectPortfolio = () => {
         <Button htmlType="submit">
           Submit
         </Button>
+
+
       </Form.Item>
     </Form>
 
@@ -227,4 +230,4 @@ export default selectPortfolio
                     </Form.Item>
                 </>
             )}
-        </Form.List> */}
+                </Form.List> */}

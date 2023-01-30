@@ -68,7 +68,9 @@ export default function BackToTop(props) {
   const [ecommerceCategory, setEcommerceCategory] = useState(false);
   const [landingPageCategory, setlandingPageCategory] = useState(false);
   const location = useLocation()
-  const category = location.state
+  const category = location.state.category
+  const templateDetails = location.state
+  // console.log(templateDetails)
   useEffect(() => {
     switch (category) {
       case 'portfolio':
@@ -93,7 +95,7 @@ export default function BackToTop(props) {
       event.preventDefault()
       // console.log(portfolioCategory,ecommerceCategory,landingPageCategory)
       if(setPortfolioCategory){
-        navigate('/create-your-portfolio')
+        navigate('/create-your-portfolio',{state:templateDetails})
       } else if(setEcommerceCategory) {
         navigate('/2')
       } else if(setlandingPageCategory){
@@ -114,6 +116,7 @@ export default function BackToTop(props) {
             <button onClick={handleChange} className="bg-green-500 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                 {/* <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg> */}
                 <CheckCircleOutlineIcon />
+
                 <span>Select Template</span>
             </button>
           </Typography>

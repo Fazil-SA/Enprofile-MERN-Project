@@ -1,5 +1,8 @@
+require("dotenv").config()
 const  UserHelper  = require('../helpers/UserHelpers')   
 const jwt = require('jsonwebtoken')
+const Stripe = require('stripe')
+const stripe = Stripe(process.env.STRIPE_KEY)
 
 const asyncHandler = require('express-async-handler') 
 
@@ -62,9 +65,75 @@ const getProductsByCategory = asyncHandler(async (req,res) => {
 const portfolioCreation = asyncHandler(async (req,res) => {
     try {
         const portfolioCreationData = req.body.headers.data
+        const purchasedTemplateData = req.body.headers.purchasedTemplate
+        // console.log(purchasedTemplateData)
         const user = req.user
-        const response = await UserHelper.createPortfolioNewUser({portfolioCreationData,user})
-        res.status(200).json({status:'url generated',portUrl : response.portfolioUrl})
+        const price = purchasedTemplateData.price
+        const session = await stripe.checkout.sessions.create({
+            line_items: [
+                {
+                  price_data: {
+                    currency: "inr",
+                    product_data: {
+                      name: "enprofile",
+                    },
+                    unit_amount: price * 100,
+                  },
+                  quantity: 1,
+                },
+              ],
+              mode: "payment",  
+              success_url: `${process.env.CLIENT_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}&user_id=${user._id}`,
+              cancel_url: `${process.env.CLIENT_URL}/payment-failed`,
+            });
+      
+            res.json({ url: session.url });
+            } catch (error) {
+              console.log(error);
+            }
+
+
+
+
+        // const response = await UserHelper.createPortfolioNewUser({portfolioCreationData,user})
+        // res.status(200).json({status:'url generated',portUrl : response.portfolioUrl})
+    
+})
+
+// const stripePayment = asyncHandler(async (req,res) => {
+//     try {
+//         const session = await stripe.checkout.sessions.create({
+//             line_items: [
+//               {
+//                 // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+//                 price: '{{PRICE_ID}}',
+//                 quantity: 1,
+//               },
+//             ],
+//             mode: 'payment',
+//             success_url: `${process.env.CLIENT_URL}?success=true`,
+//             cancel_url: `${process.env.CLIENT_URL}?canceled=true`,
+//           });
+        
+//           res.redirect({url :session.url});
+//     } catch (error) {
+//         console.log(error)
+//     }
+// })
+
+const paymentSuccess = asyncHandler(async (req,res) => {
+    try {
+        const successUrl = req.body.headers.successUrl;
+        const url = new URL(successUrl);
+        const sessionId = url.searchParams.get("session_id");
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+        // console.log(session.status); // "succeeded" or "canceled"
+        if (session.status === "complete") {
+          console.log("payment is successful ");
+        } else {
+          console.log('payment is not successful')
+        }
+
     } catch (error) {
         console.log(error)
     }
@@ -74,5 +143,6 @@ module.exports = {
     userRegister,
     userLogin,
     getProductsByCategory,
-    portfolioCreation
+    portfolioCreation,
+    paymentSuccess
 }
