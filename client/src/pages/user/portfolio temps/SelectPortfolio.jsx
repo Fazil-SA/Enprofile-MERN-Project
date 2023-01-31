@@ -10,8 +10,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 import DoneIcon from '@mui/icons-material/Done';
 import { axiosUserInstance } from "../../../Instance/Axios";
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { portfolioCreationData, purchasedTemplateData } from '../../../redux/authSlice'
 const selectPortfolio = () => {
 
     const [selectedImages, setSelectedImages] = useState([])
@@ -21,6 +21,7 @@ const selectPortfolio = () => {
 
     const navigate = useNavigate()
     const location = useLocation()
+    const dispatch = useDispatch()
     const templateDetails = location.state
     // console.log(templateDetails)
 
@@ -31,19 +32,29 @@ const selectPortfolio = () => {
         portfolioCreation()
         async function portfolioCreation() {
             const config = {
-                headers: {
-                  "Accept": 'application/json',
-                  "Authorization": token,
-                  "Content-Type": 'application/json',
+                datas: {
+                //   "Accept": 'application/json',
+                //   "Authorization": token,
+                //   "Content-Type": 'application/json',
                   "data" : values,
                   "purchasedTemplate" : templateDetails
                 },
               };
         try {
             const response = await axiosUserInstance
-            .post('/create-portfolio-user-data-upload',config)
+            .post('/create-portfolio-user-data-upload',config, {
+                headers: {
+                    'authorization': token,
+                    'Accept' : 'application/json',
+                    'Content-Type': 'application/json'
+                }
+                })
             .then((response) => {
+                // console.log(response)
                 if(response.data.url){
+                    // console.log(values,templateDetails)
+                    dispatch(portfolioCreationData(values))
+                    dispatch(purchasedTemplateData(templateDetails))
                     window.location.replace(response.data.url)    
                 }
             })
@@ -158,7 +169,7 @@ const selectPortfolio = () => {
             <Input placeholder='Contact Number' />
         </Form.Item>
         <Form.Item name={'portfolioUrl'} label='Page Url' rules={[{ required: true, message: 'This field is required' }]}>
-            <Input placeholder='Redirect URL' />
+            <Input placeholder='Redirect URL without "/"' />
         </Form.Item>
         <ToastContainer />
         <Form.Item>

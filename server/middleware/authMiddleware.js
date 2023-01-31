@@ -4,10 +4,10 @@ const User = require('../models/userSchema')
 
 const protect = asyncHandler(async (req,res,next) => {
     let token
-    if(req.body.headers.Authorization){
+    if(req.headers.authorization){
         try {
             //Get token from header
-            token = req.body.headers.Authorization
+            token = req.headers.authorization
             //Verify token
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
             //Get user from the token

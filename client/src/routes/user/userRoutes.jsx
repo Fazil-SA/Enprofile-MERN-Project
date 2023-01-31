@@ -1,8 +1,7 @@
 import React from 'react'
-import {Login,Register,Home,PortTempDemo1,SelectPortfolio} from '../../pages/user/userPages'
+import {Login,Register,Home,PortTempDemo1,SelectPortfolio,PaymentSuccess,PaymentFail} from '../../pages/user/userPages'
 import {Route , Routes} from 'react-router-dom'
 import ProtectRoute from './ProtectRoute'
-import PaymentSuccess from '../../components/user/PaymentSuccess'
 
 const userRoutes = () =>  (
         <Routes>
@@ -14,6 +13,7 @@ const userRoutes = () =>  (
             <Route element={<ProtectRoute />}>
               <Route path='/create-your-portfolio' element={<SelectPortfolio />} />            
               <Route path='/payment-success' element={<PaymentSuccess />} />            
+              <Route path='/payment-failed' element={<PaymentFail />} />            
             </Route>
             {/* <Route path='/create-your' element={<SelectPortfolio1 />} /> */}
 

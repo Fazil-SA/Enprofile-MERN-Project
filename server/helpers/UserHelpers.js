@@ -102,7 +102,21 @@ const landingTemplates = () => {
 const createPortfolioNewUser = (data) => {
     return new Promise(async (resolve,reject) => {
         try {
-            const portUrl = await Portfolio.create({portfolioDetails:data.portfolioCreationData,user:data.user})
+            const portUrl = await Portfolio.create({
+                logoTitle : data.portfolioCreationData.logoTitle,
+                jobTitle : data.portfolioCreationData.jobTitle,
+                firstPara : data.portfolioCreationData.firstPara,
+                coverImageUrl : data.portfolioCreationData.coverImageUrl,
+                aboutDesc : data.portfolioCreationData.aboutDesc,
+                linkedin : data.portfolioCreationData.linkedin,
+                github : data.portfolioCreationData.github,
+                email : data.portfolioCreationData.email,
+                contact : data.portfolioCreationData.contact,
+                portfolioUrl : data.portfolioCreationData.portfolioUrl,
+                templateName : data.purchasedTemplateData.name,
+                templateCategory : data.purchasedTemplateData.category,
+                templatePrice : data.purchasedTemplateData.price,
+            })
             resolve(portUrl)
         } catch (error) {
             reject(error)

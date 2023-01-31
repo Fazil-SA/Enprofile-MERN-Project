@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { close,logo,menu } from '../../assets/user/index'
 import { navLinks } from '../../constants/user/index'
 import { useSelector, useDispatch } from 'react-redux'
-import { clearUserToken } from '../../redux/authSlice'
+import { clearUserToken, clearPortfolioCreationData, clearPurchasedTemplateData } from '../../redux/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +13,12 @@ const NavBar = () => {
   const token = useSelector((state) => state.authSlice.userToken)
   const navigate = useNavigate()
   const Dispatch = useDispatch()
+
+  function clearDispatch() {
+    Dispatch((clearUserToken()))
+    Dispatch((clearPortfolioCreationData()))
+    Dispatch((clearPurchasedTemplateData()))
+  }
   return (
     <nav className='w-full flex py-6 justify-between items-start navbar'>
       <a href="/">
@@ -29,7 +35,7 @@ const NavBar = () => {
           </li>
         })}
         <button onClick={() => { 
-                token ? Dispatch((clearUserToken())) && toast.error("User has been logged out!!", {
+                token ? clearDispatch()  && toast.error("User has been logged out!!", {
                   theme: "colored",
                   autoClose: 3000,
               }) : navigate('/login')
@@ -53,7 +59,7 @@ const NavBar = () => {
                 </li>
               })}
               <button onClick={() => {
-                token ? Dispatch((clearUserToken())) && toast.error("User has been logged out!!", {
+                token ? clearDispatch() && toast.error("User has been logged out!!", {
                   theme: "colored",
                   autoClose: 3000,
               }) : navigate('/login')

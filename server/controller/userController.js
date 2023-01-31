@@ -64,8 +64,8 @@ const getProductsByCategory = asyncHandler(async (req,res) => {
 
 const portfolioCreation = asyncHandler(async (req,res) => {
     try {
-        const portfolioCreationData = req.body.headers.data
-        const purchasedTemplateData = req.body.headers.purchasedTemplate
+        const portfolioCreationData = req.body.datas.data
+        const purchasedTemplateData = req.body.datas.purchasedTemplate
         // console.log(purchasedTemplateData)
         const user = req.user
         const price = purchasedTemplateData.price
@@ -123,15 +123,23 @@ const portfolioCreation = asyncHandler(async (req,res) => {
 
 const paymentSuccess = asyncHandler(async (req,res) => {
     try {
-        const successUrl = req.body.headers.successUrl;
+        const successUrl = req.body.datas.successUrl;
         const url = new URL(successUrl);
         const sessionId = url.searchParams.get("session_id");
         const session = await stripe.checkout.sessions.retrieve(sessionId);
         // console.log(session.status); // "succeeded" or "canceled"
+        
+        const portfolioCreationData = req.body.datas.portfolioCreationData
+        const purchasedTemplateData = req.body.datas.purchasedTemplateData
+        // console.log(portfolioCreationData, purchasedTemplateData)
+        
         if (session.status === "complete") {
-          console.log("payment is successful ");
+          const response = await UserHelper.createPortfolioNewUser({portfolioCreationData, purchasedTemplateData})
+          res.status(200).json({status:'Payment Successful'})
+        //   console.log("payment is successful ");
+        //   console.log(portfolioCreationData,purchasedTemplateData)
         } else {
-          console.log('payment is not successful')
+          console.log('Payment Not Successful')
         }
 
     } catch (error) {

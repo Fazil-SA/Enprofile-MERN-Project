@@ -6,7 +6,9 @@ const INITIAL_STATE = {
   adminDetails: '',
   userAllDetails:'',
   userToken:'',
-  adminToken:''
+  adminToken:'',
+  portfolioCreationData:'',
+  purchasedTemplateData:''
 };
 
 
@@ -79,6 +81,26 @@ const loginSlice = createSlice({
         adminToken=false;
         return{...state,adminToken}
       }, 
+      portfolioCreationData:(state,action)=>{
+        let{ portfolioCreationData } = state;
+        portfolioCreationData = action.payload;
+        return{...state, portfolioCreationData}
+      }, 
+      purchasedTemplateData:(state,action)=>{
+        let{ purchasedTemplateData } = state;
+        purchasedTemplateData = action.payload;
+        return{...state, purchasedTemplateData}
+      }, 
+      clearPortfolioCreationData:(state,action)=>{
+        let{ portfolioCreationData } = state;
+        portfolioCreationData = false;
+        return{...state, portfolioCreationData}
+      }, 
+      clearPurchasedTemplateData:(state,action)=>{
+        let{ purchasedTemplateData } = state;
+        purchasedTemplateData = false;
+        return{...state, purchasedTemplateData}
+      }, 
     },
   });
 
@@ -96,6 +118,10 @@ const loginSlice = createSlice({
     categoryDetails,
     adminToken,
     clearAdminToken,
+    portfolioCreationData,
+    purchasedTemplateData,
+    clearPortfolioCreationData,
+    clearPurchasedTemplateData
   } = loginSlice.actions;
   
 
