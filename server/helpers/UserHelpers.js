@@ -105,9 +105,10 @@ const createPortfolioNewUser = (data) => {
             const portUrl = await Portfolio.create({
                 logoTitle : data.portfolioCreationData.logoTitle,
                 jobTitle : data.portfolioCreationData.jobTitle,
-                firstPara : data.portfolioCreationData.firstPara,
+                caption : data.portfolioCreationData.caption,
                 coverImageUrl : data.portfolioCreationData.coverImageUrl,
-                aboutDesc : data.portfolioCreationData.aboutDesc,
+                firstPara : data.portfolioCreationData.firstPara,
+                secondPara : data.portfolioCreationData.secondPara,
                 linkedin : data.portfolioCreationData.linkedin,
                 github : data.portfolioCreationData.github,
                 email : data.portfolioCreationData.email,
@@ -124,6 +125,17 @@ const createPortfolioNewUser = (data) => {
     })
 }
 
+const displayTempData = (url) => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const portfolio = Portfolio.find({portfolioUrl : url})
+            resolve(portfolio)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 
 module.exports = {
     createUser,
@@ -132,5 +144,6 @@ module.exports = {
     portfolioTemplates,
     ecommerceTemplates,
     landingTemplates,
-    createPortfolioNewUser
+    createPortfolioNewUser,
+    displayTempData
 }

@@ -116,13 +116,13 @@ const selectPortfolio = () => {
 
     <Form onFinish={onFinish} style={{maxWidth: 500}}>
         <Form.Item name={'logoTitle'} label='Logo Title' rules={[{ required: true, message: 'This field is required' }]}>
-            <Input placeholder='Logo Title' />
+            <Input placeholder='Your Name' />
         </Form.Item>
         <Form.Item name={'jobTitle'} label='Job Title' rules={[{ required: true, message: 'This field is required' }]}>
-            <Input placeholder='Job Title' />
+            <Input placeholder="I'm a Full Stack Developer" />
         </Form.Item>
-        <Form.Item name={'firstPara'} label='First Paragraph' rules={[{ required: true, message: 'This field is required' }]}>
-            <Input placeholder='First Para' />
+        <Form.Item name={'caption'} label='Caption' rules={[{ required: true, message: 'This field is required' }]}>
+            <Input placeholder='A highly motivated and skilled Full stack developer with experience in building fullstack web applications. Proficient in modern JavaScript, including React and Node.js, as well as MongoDB and Express.js. Strong problem - solving skills along with passion for continuous learning and staying up-to-date with the latest technologies.' />
         </Form.Item>
         <Form.Item style={{display:'flex' ,justifyContent:'center', alignContent:'center'}} name={'coverImageUrl'} >
                         <input
@@ -153,8 +153,11 @@ const selectPortfolio = () => {
                      loading==='doneUpload' && imageDisplayUrl ?  <DoneIcon sx={{ fontSize: 70 , justifyContent:'center',justifyItems:'center'}} /> : ''
                     }
         </Form.Item>
-        <Form.Item name={'aboutDesc'} label='About Page' rules={[{ required: true, message: 'This field is required' }]}>
-            <Input placeholder='Explain About Yourself' />
+        <Form.Item name={'firstPara'} label='About Page First Para' rules={[{ required: true, message: 'This field is required' }]}>
+            <Input placeholder='Explain About Yourself for display in About Me Session First Para' />
+        </Form.Item>
+        <Form.Item name={'secondPara'} label='About Page Second Para' rules={[{ required: true, message: 'This field is required' }]}>
+            <Input placeholder='Explain About Yourself for display in About Me Session Second Para' />
         </Form.Item>
         <Form.Item name={'linkedin'} label='LinkedIn' rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='LinkedIn Link' />

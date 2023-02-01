@@ -101,6 +101,7 @@ const loginSlice = createSlice({
         purchasedTemplateData = false;
         return{...state, purchasedTemplateData}
       }, 
+      
     },
   });
 

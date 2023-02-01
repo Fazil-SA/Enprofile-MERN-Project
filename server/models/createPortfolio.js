@@ -14,11 +14,15 @@ const createPortfolio = new Schema({
         type : String,
         // required : true
     },
+    secondPara : {
+        type : String,
+        // required : true
+    },
     coverImageUrl : {
         type : String,
         // required : true
     },
-    aboutDesc : {
+    caption : {
         type : String,
         // required : true
     },

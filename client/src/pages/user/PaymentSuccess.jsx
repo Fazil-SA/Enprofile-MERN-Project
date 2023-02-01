@@ -24,7 +24,7 @@ const PaymentSuccess = () => {
     };
     try {
       //   console.log(succesurl);
-      const res = await axiosUserInstance.post("/payment-success", config,{
+      const res = await axiosUserInstance.post("/payment-success", config, {
         headers: {
             'authorization': token,
             'Accept' : 'application/json',

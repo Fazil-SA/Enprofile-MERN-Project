@@ -7,7 +7,7 @@ import React from "react";
 //   faInstagram
 // } from "@fontawesome/fontawesome-free-brands";
 
-const Contact = () => {
+const Contact = (tempData) => {
   return (
     <div
       id="contact"
@@ -16,7 +16,7 @@ const Contact = () => {
       <div className="flex flex-col p-4 mt-20 md:mt-0 justify-center max-w-screen-lg mx-auto">
         <div className="pb-8">
           <p className="text-4xl font-bold  border-4 border-gray-500">
-          <a href="tel:5554280940" className="flex flex-col items-center"><button>Contact Me</button></a>
+          <a href={`tel:${tempData.data.contact}`} className="flex flex-col items-center"><button>Contact Me</button></a>
           </p>
           {/* <p classN ame="py-6">Submit the form below to get in touch with me</p> */}
           {/* <div>

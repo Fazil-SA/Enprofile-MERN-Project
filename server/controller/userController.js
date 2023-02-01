@@ -147,10 +147,26 @@ const paymentSuccess = asyncHandler(async (req,res) => {
     }
 })
 
+const templateRender = asyncHandler(async (req,res) => {
+    try {
+        const url = req.body.url
+        const response = await UserHelper.displayTempData(url)
+        if(response == '') {
+            res.status(200).json({mssg:"No urls Found"})
+        } else {
+            res.status(200).json(response)
+            // console.log(response)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 module.exports = {
     userRegister,
     userLogin,
     getProductsByCategory,
     portfolioCreation,
-    paymentSuccess
+    paymentSuccess,
+    templateRender
 }

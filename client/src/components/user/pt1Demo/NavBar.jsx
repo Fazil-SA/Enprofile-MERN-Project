@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {FaBars,FaTimes} from 'react-icons/fa'
 import { Link } from "react-scroll";
 
-const NavBar = () => {
+const NavBar = (tempData) => {
   const links = [
     {
         id: 1,
@@ -29,7 +29,7 @@ const NavBar = () => {
   return (
     <div className='flex justify-between items-center w-full h-20 px-4 text-white bg-black fixed'>
         <div>
-            <h1 className='text-5xl font-signature ml-2'>Fazil</h1>
+            <h1 className='text-5xl font-signature ml-2'>{ tempData.data.logoTitle || 'Fazil' }</h1>
         </div>
         <ul className='md:flex hidden'>
                 {links.map(({ id,link }) => (

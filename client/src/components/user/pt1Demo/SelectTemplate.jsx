@@ -70,7 +70,6 @@ export default function BackToTop(props) {
   const location = useLocation()
   const category = location.state.category
   const templateDetails = location.state
-  // console.log(templateDetails)
   useEffect(() => {
     switch (category) {
       case 'portfolio':
@@ -82,7 +81,7 @@ export default function BackToTop(props) {
       case 'landingpage':
         setlandingPageCategory(true)
         break;
-      default:
+      default: 
         break;
     }
     

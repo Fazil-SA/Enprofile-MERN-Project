@@ -3,14 +3,15 @@ import { FaGithub,FaLinkedin } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsPersonLinesFill } from "react-icons/bs";
 
-const SocialLinks = () => {
+const SocialLinks = (tempData) => {
+  console.log(tempData.data.linkedin)
   const links = [
     {
       id:1,
       child: (
         <>LinkedIn<FaLinkedin size={30} /></>
       ),
-      href: 'https://www.linkedin.com/in/fazil-s-a-9721021b4/',
+      href: tempData.data.linkedin  || 'https://www.linkedin.com/in/fazil-s-a-9721021b4/' ,
       style: 'rounded-tr-md'
     },
     {
@@ -18,24 +19,25 @@ const SocialLinks = () => {
       child: (
         <>GitHub<FaGithub size={30} /></>
       ),
-      href: 'https://github.com/Fazil-SA',
-    },
-    {
-      id:3,
-      child: (
-        <>Mail<HiOutlineMail size={30} /></>
-      ),
-      href: 'mailto:fazilsa2000@gmail.com',
-    },
-    {
-      id:4,
-      child: (
-        <>Resume<BsPersonLinesFill size={30} /></>
-      ),
-      href: '',
+      href: tempData.data.github || 'https://github.com/Fazil-SA',
       style: 'rounded-br-md',
-      download: true
     },
+    // {
+    //   id:3,
+    //   child: (
+    //     <>Mail<HiOutlineMail size={30} /></>
+    //   ),
+    //   href: 'mailto:fazilsa2000@gmail.com',
+    // },
+    // {
+    //   id:4,
+    //   child: (
+    //     <>Resume<BsPersonLinesFill size={30} /></>
+    //   ),
+    //   href: '',
+    //   style: 'rounded-br-md',
+    //   download: true
+    // },
   ]
   return (
     <div className='top-[65%] lg:flex flex-col md:top-[35%] left-0 fixed'>
