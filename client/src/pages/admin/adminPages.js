@@ -11,5 +11,5 @@ export {
     OrderManagement,
     ProductManagement,
     UserManagement,
-    AddProduct
+    AddProduct,
 }

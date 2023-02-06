@@ -106,6 +106,14 @@ const updateProduct = asyncHandler(async (req,res) => {
     }
 })
 
+const orders = asyncHandler(async (req,res) => {
+    try {
+        const orders = await AdminHelpers.allOrders()
+        res.status(200).json(orders)
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 
 module.exports = {
@@ -118,4 +126,5 @@ module.exports = {
     deleteProduct,
     editProduct,
     updateProduct,
+    orders
 }

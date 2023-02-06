@@ -23,7 +23,7 @@ const Hero = () => (
           {/* <div className='ss:flex md:mr-4 hidden lg:hidden'>
             <GetStarted />
           </div> */}
-<div className={`ss:flex md:mr-4 hidden mr-0 animate-spin-bounce`}>
+          <div className={`ss:flex md:mr-4 hidden mr-0 animate-spin-bounce`}>
             <GetStarted />
           </div>
           

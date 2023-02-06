@@ -14,7 +14,7 @@ const PortTempDemo1 = () => {
   const location = useLocation()
   const tempDataEmail = location.state.email
   const tempDataInfo = location.state
-  console.log(tempDataInfo)
+  // console.log(tempDataInfo)
   return (
     <div>
       {tempDataEmail ? '' 

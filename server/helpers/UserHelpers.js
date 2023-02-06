@@ -4,6 +4,7 @@ const Products = require('../models/productSchema')
 const Portfolio = require('../models/createPortfolio')
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
+var {ObjectId} = require('mongodb');
 
 const createUser = (userData) => {
     return new Promise(async (resolve,reject) => {
@@ -125,6 +126,42 @@ const createPortfolioNewUser = (data) => {
     })
 }
 
+const updatePortfolioDetails = (portfolioCreationData) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const upData = portfolioCreationData
+            // const email = upData.portfolioCreationData.email
+            Portfolio.findOne({ _id: upData.prodId.prodId })
+                .then((res) => {
+                    Portfolio.updateOne({ _id: res._id }, {
+                        logoTitle: upData.prodId.data.logoTitle,
+                        jobTitle: upData.prodId.data.jobTitle,
+                        caption: upData.prodId.data.caption,
+                        coverImageUrl: upData.prodId.data.coverImageUrl,
+                        firstPara: upData.prodId.data.firstPara,
+                        secondPara: upData.prodId.data.secondPara,
+                        linkedin: upData.prodId.data.linkedin,
+                        github: upData.prodId.data.github,
+                        email: upData.prodId.data.email,
+                        contact: upData.prodId.data.contact,
+                        portfolioUrl: upData.prodId.data.portfolioUrl
+                    })
+                        .then((resData) => {
+                            console.log(resData)
+                            resolve(res)
+                        })
+                })
+
+        }
+        catch (error) {
+            reject(error)
+        }
+    })
+}
+
+            
+ 
+
 const displayTempData = (url) => {
     return new Promise(async (resolve,reject) => {
         try {
@@ -136,6 +173,41 @@ const displayTempData = (url) => {
     })
 }
 
+const findOrders = (user) => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const portfolioOrders = Portfolio.find({email:user})
+            resolve(portfolioOrders) 
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+const editProduct = (prodId) => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const id = prodId.datas.prodId
+            const result = await Portfolio.find({_id : id})
+            resolve(result)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+const deleteWebsite = (prodId) => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const id = prodId
+            // console.log(id)
+            const result = await Portfolio.findByIdAndDelete({_id : ObjectId(id)})
+            resolve(result)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 
 module.exports = {
     createUser,
@@ -145,5 +217,9 @@ module.exports = {
     ecommerceTemplates,
     landingTemplates,
     createPortfolioNewUser,
-    displayTempData
+    displayTempData,
+    findOrders,
+    editProduct,
+    updatePortfolioDetails,
+    deleteWebsite
 }

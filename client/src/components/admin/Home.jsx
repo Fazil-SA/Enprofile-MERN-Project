@@ -15,34 +15,45 @@ const Home = () => {
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 2 , ml:8 , mr:8}}>
         <DrawerHeader />
-        <Typography variant='h1' className='flex justify-center'>This is Home Page</Typography>
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <Typography variant='h6' className='flex justify-center font-extrabold'>Welcome, Admin</Typography>
+
+
+
+          <div className='flex items-center justify-center mt-3'>
+    <div className="w-full max-w-sm p-4 bg-transparent border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+        <h5 className="mb-3 text-base font-semibold text-white md:text-xl dark:text-white">
+            Enprofile
+        </h5>
+        <p className="text-sm font-normal text-gray-500 dark:text-gray-400">Empower the tech</p>
+        <ul className="my-4 space-y-3">
+            <li>
+                <a href="/admin/userManagement" className="flex items-center p-3 text-base hover:scale-105 transition font-bold text-gray-900 rounded-lg bg-gray-500 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                    <span className="flex-1 ml-3 whitespace-nowrap">User Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/productManagement" className="flex items-center p-3 hover:scale-105 transition text-base font-bold text-gray-900 rounded-lg bg-gray-500 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                    <span className="flex-1 ml-3 whitespace-nowrap">Product Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/orderManagement" className="flex items-center p-3 text-base hover:scale-105 transition font-bold text-gray-900 rounded-lg bg-gray-500 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                    <span className="flex-1 ml-3 whitespace-nowrap">Order Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin/addProduct" className="flex items-center p-3 text-base hover:scale-105 transition font-bold text-gray-900 rounded-lg bg-gray-500 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+                    <span className="flex-1 ml-3 whitespace-nowrap">Add Product</span>
+                </a>
+            </li>
+        </ul>
+      
+    </div>
+    </div>
+
+
+
+
       </Box>
     </>
   )

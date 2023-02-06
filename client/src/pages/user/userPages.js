@@ -7,6 +7,7 @@ import PaymentSuccess from './PaymentSuccess'
 import PaymentFail from './PaymentFail'
 import ParamsTemplateRendering from './ParamsTemplateRendering'
 import Page404Error from './Page404Error'
+import Profile from './Profile'
 // import SelectPortfolio1 from './portfolio temps/SelectPortfolio1'
 
 
@@ -19,6 +20,7 @@ export {
     PaymentSuccess,
     PaymentFail,
     ParamsTemplateRendering,
-    Page404Error
+    Page404Error,
+    Profile
     // SelectPortfolio1
 }

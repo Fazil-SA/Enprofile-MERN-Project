@@ -97,7 +97,7 @@ const Home = () => {
     <>
       <Box component="main" sx={{ flexGrow: 1, p: 2 , ml:{xs: 8,md:14} , mr:{xs:2,md:8} }}>
         <DrawerHeader />
-        <Typography variant='h4' className='flex justify-center font-extrabold'>User Management Page</Typography>
+        <Typography variant='h6' className='flex justify-center font-extrabold'>User Management Page</Typography>
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
           getRowId={(row) => row?.email}

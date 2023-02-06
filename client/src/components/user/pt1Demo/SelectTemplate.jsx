@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { logo } from '../../../assets/user/index'
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import CssBaseline from '@mui/material/CssBaseline';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Fade from '@mui/material/Fade';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { logo } from "../../../assets/user/index";
+import PropTypes from "prop-types";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import CssBaseline from "@mui/material/CssBaseline";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+import Box from "@mui/material/Box";
+import Fab from "@mui/material/Fab";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Fade from "@mui/material/Fade";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 function ScrollTop(props) {
@@ -27,12 +27,12 @@ function ScrollTop(props) {
 
   const handleClick = (event) => {
     const anchor = (event.target.ownerDocument || document).querySelector(
-      '#back-to-top-anchor',
+      "#back-to-top-anchor"
     );
 
     if (anchor) {
       anchor.scrollIntoView({
-        block: 'center',
+        block: "center",
       });
     }
   };
@@ -42,7 +42,7 @@ function ScrollTop(props) {
       <Box
         onClick={handleClick}
         role="presentation"
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        sx={{ position: "fixed", bottom: 16, right: 16 }}
       >
         {children}
       </Box>
@@ -59,65 +59,69 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-
-
 //ecommerce,portfolio,landingpage
 export default function BackToTop(props) {
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
   const [portfolioCategory, setPortfolioCategory] = useState(false);
   const [ecommerceCategory, setEcommerceCategory] = useState(false);
   const [landingPageCategory, setlandingPageCategory] = useState(false);
-  const location = useLocation()
-  const category = location.state.category
-  const templateDetails = location.state
+  const location = useLocation();
+  const category = location.state.category;
+  const templateDetails = location.state;
   useEffect(() => {
     switch (category) {
-      case 'portfolio':
-        setPortfolioCategory(true)
+      case "portfolio":
+        setPortfolioCategory(true);
         break;
-      case 'ecommerce':
-        setEcommerceCategory(true)
+      case "ecommerce":
+        setEcommerceCategory(true);
         break;
-      case 'landingpage':
-        setlandingPageCategory(true)
+      case "landingpage":
+        setlandingPageCategory(true);
         break;
-      default: 
+      default:
         break;
     }
-    
   }, [category]);
-  
+
   // console.log(category)
 
   async function handleChange(event) {
     try {
-      event.preventDefault()
+      event.preventDefault();
       // console.log(portfolioCategory,ecommerceCategory,landingPageCategory)
-      if(setPortfolioCategory){
-        navigate('/create-your-portfolio',{state:templateDetails})
-      } else if(setEcommerceCategory) {
-        navigate('/2')
-      } else if(setlandingPageCategory){
-        navigate('/3')
+      if (setPortfolioCategory) {
+        navigate("/create-your-portfolio", { state: templateDetails });
+      } else if (setEcommerceCategory) {
+        navigate("/2");
+      } else if (setlandingPageCategory) {
+        navigate("/3");
       } else {
-        console.log('no routes')
+        console.log("no routes");
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar>
-        <Toolbar>
+        <Toolbar sx={{ background: "#001E3C" }}>
           <Typography variant="h6" component="div">
-            <button onClick={handleChange} className="bg-green-500 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                {/* <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg> */}
-                <CheckCircleOutlineIcon />
-
-                <span>Select Template</span>
+            <button
+              onClick={handleChange}
+              data-modal-target="authentication-modal"
+              data-modal-toggle="authentication-modal"
+              class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              type="button"
+            >
+              <CheckCircleOutlineIcon />
+              Select Template
             </button>
+            {/* <span>Select Template</span> */}
+            {/* </button> */}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -128,6 +132,11 @@ export default function BackToTop(props) {
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>
+
+
+      
+      
+
     </React.Fragment>
   );
 }

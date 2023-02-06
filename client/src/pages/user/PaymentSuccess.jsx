@@ -4,7 +4,6 @@ import { purchasedTemplateData, userToken } from "../../redux/authSlice";
 import { Button, Result } from "antd";
 import { Link } from "react-router-dom";
 import { axiosUserInstance } from "../../Instance/Axios";
-
 const PaymentSuccess = () => {
   const token = useSelector((state) => state.authSlice.userToken)
   const portfolioCreationData = useSelector((state) => state.authSlice.portfolioCreationData)
@@ -14,9 +13,6 @@ const PaymentSuccess = () => {
     const successUrl = window.location.href;
     const config = {
       datas: {
-        // Accept: "application/json",
-        // Authorization: userToken,
-        // "Content-Type": "application/json",
         purchasedTemplateData: purchasedTemplateData,
         portfolioCreationData: portfolioCreationData,
         successUrl: successUrl,
@@ -43,7 +39,7 @@ const PaymentSuccess = () => {
   
   return (
     <div>
-      <div className="mt-32">
+      <div className="h-screen flex justify-center justify-items-center items-center">
         <Result
           status="success"
           title="Successfully Completed Payment"
@@ -51,7 +47,7 @@ const PaymentSuccess = () => {
           extra={[
             <Link to={`/${portfolioCreationData.portfolioUrl}`}>
               {" "}
-              <Button key="console">Go To Website</Button>,
+              <Button key="console">Go To Website</Button>
             </Link>, // <Button key="buy">Buy Again</Button>,
           ]}
         />

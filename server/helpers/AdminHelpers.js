@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Admin = require('../models/adminSchema')
 const User = require('../models/userSchema')
 const Product = require('../models/productSchema')
+const Portfolio = require('../models/createPortfolio')
 const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcryptjs')
 
@@ -121,6 +122,17 @@ const updateProduct = (data) => {
     })
 }
 
+const allOrders = () => {
+    return new Promise(async (resolve,reject) => {
+        try {
+            const result = await Portfolio.find()
+            resolve(result)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
 module.exports = {
     findAdmin,
     getUsers,
@@ -129,7 +141,8 @@ module.exports = {
     getAllProducts,
     deleteProduct,
     editProduct,
-    updateProduct
+    updateProduct,
+    allOrders
 }
 
 

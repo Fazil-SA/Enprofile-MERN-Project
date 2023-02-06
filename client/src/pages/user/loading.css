@@ -1,7 +1,65 @@
-body {
+/* body { */
     /* background:#000; */
+  /* } */
+
+body {
+    /* width: 100%; */
+    min-height: 100vh;
+    /* padding: 5%; */
+    background-image: url(../../assets/user/dark-bg.jpg);
+    /* background-position: center; */
+    background-size : cover;
+}
+
+::-webkit-scrollbar{
+  height: 4px;
+  width: 4px;
+  background: gray;
+}
+::-webkit-scrollbar-thumb:horizontal{
+  background: darkcyan; 
+  border-radius: 10px;
+}
+.MuiTypography-root {
+  color: white;
+}
+.MuiDataGrid-cellContent {
+  color: white;
+}
+.MuiDataGrid-columnHeaderTitle {
+  color: white;
+}
+.MuiFormLabel-root {
+  color: black !important;
+  /* font-weight: 700 !important; */
+}
+#fullWidth {
+  background: radial-gradient(white, transparent);
+  border-block-color: white;
   }
-  
+.MuiPaper-root {
+  background-color: transparent !important;
+  color: white;
+}
+.MuiMenuItem-gutters {
+  background-color: white !important;
+}
+.MuiSvgIcon-root {
+  color: white;
+}
+.ant-result-title {
+  color: white;
+}
+
+.ant-input{
+  background-color: lightyellow;
+  color: black !important;
+}
+#logoTitle ::placeholder{
+  /* background-color: lightyellow; */
+  color: red !important;
+}
+
   #load {
     position:absolute;
     width:600px;

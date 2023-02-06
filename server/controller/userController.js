@@ -91,13 +91,21 @@ const portfolioCreation = asyncHandler(async (req,res) => {
             } catch (error) {
               console.log(error);
             }
+})
 
+const updateCreation = asyncHandler(async (req,res) => {
+    try {
+        // const portfolioCreationData = req.body.datas.data
+        const prodId = req.body.datas
+        // console.log(prodId)
+        const user = req.user
 
-
-
-        // const response = await UserHelper.createPortfolioNewUser({portfolioCreationData,user})
-        // res.status(200).json({status:'url generated',portUrl : response.portfolioUrl})
-    
+        // console.log(user,portfolioCreationData)
+        const response = await UserHelper.updatePortfolioDetails({prodId})
+        res.status(200).json({status:'Update Successful'})
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 // const stripePayment = asyncHandler(async (req,res) => {
@@ -162,11 +170,46 @@ const templateRender = asyncHandler(async (req,res) => {
     }
 })
 
+
+const orderCrudDisplay = asyncHandler(async (req,res) => {
+    try {
+        const user = req.user.email
+        const orders = await UserHelper.findOrders(user)
+        res.status(200).json(orders)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+const editWebsite = asyncHandler(async (req,res) => {
+    try {
+        const prodId = req.body
+        const editProd = await UserHelper.editProduct(prodId)
+        res.status(200).json(editProd)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+const deleteWebsite = asyncHandler(async (req,res) => {
+    try {
+        const prodId = req.body.prodId
+        const deleteProd = await UserHelper.deleteWebsite(prodId)
+        res.status(200).json(deleteProd)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 module.exports = {
     userRegister,
     userLogin,
     getProductsByCategory,
     portfolioCreation,
     paymentSuccess,
-    templateRender
+    templateRender,
+    orderCrudDisplay,
+    editWebsite,
+    updateCreation,
+    deleteWebsite
 }

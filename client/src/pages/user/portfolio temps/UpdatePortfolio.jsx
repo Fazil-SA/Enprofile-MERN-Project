@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { portfolioCreationData, purchasedTemplateData } from '../../../redux/authSlice'
 import '../../../pages/user/loading.css'
 
-const selectPortfolio = () => {
+const UpdatePortfolio = () => {
 
     const [selectedImages, setSelectedImages] = useState([])
     const [imageDisplayUrl, setImageDisplayUrl] = useState('')
@@ -24,8 +24,8 @@ const selectPortfolio = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const dispatch = useDispatch()
-    const templateDetails = location.state
-    // console.log(templateDetails)
+    const UpdateData = location.state
+    const prodId = location.state[0]._id
 
     const token = useSelector((state) => state.authSlice.userToken)
 
@@ -35,16 +35,13 @@ const selectPortfolio = () => {
         async function portfolioCreation() {
             const config = {
                 datas: {
-                //   "Accept": 'application/json',
-                //   "Authorization": token,
-                //   "Content-Type": 'application/json',
                   "data" : values,
-                  "purchasedTemplate" : templateDetails
+                  "prodId" : prodId
                 },
               };
         try {
             const response = await axiosUserInstance
-            .post('/create-portfolio-user-data-upload',config, {
+            .post('/update-portfolio-user-data',config, {
                 headers: {
                     'authorization': token,
                     'Accept' : 'application/json',
@@ -52,12 +49,8 @@ const selectPortfolio = () => {
                 }
                 })
             .then((response) => {
-                // console.log(response)
-                if(response.data.url){
-                    // console.log(values,templateDetails)
-                    dispatch(portfolioCreationData(values))
-                    dispatch(purchasedTemplateData(templateDetails))
-                    window.location.replace(response.data.url)    
+                if(response.data.status == 'Update Successful'){
+                    navigate('/profile')  
                 }
             })
             .catch((err) => {
@@ -117,13 +110,13 @@ const selectPortfolio = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 10,ml:{md:20,lg:40},mr:{md:20} , justifyContent:'center',justifyItems:'center' }}>
 
     <Form onFinish={onFinish} style={{maxWidth: 500}}>
-        <Form.Item name={'logoTitle'} rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'logoTitle'} initialValue={UpdateData ? UpdateData[0].logoTitle : ''} rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='Your Name' />
         </Form.Item>
-        <Form.Item name={'jobTitle'} rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'jobTitle'} initialValue={UpdateData ? UpdateData[0].jobTitle : ''} rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder="I'm a Full Stack Developer" />
         </Form.Item>
-        <Form.Item name={'caption'}  rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'caption'} initialValue={UpdateData ? UpdateData[0].caption : ''} rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='A highly motivated and skilled Full stack developer with experience in building fullstack web applications. Proficient in modern JavaScript, including React and Node.js, as well as MongoDB and Express.js. Strong problem - solving skills along with passion for continuous learning and staying up-to-date with the latest technologies.' />
         </Form.Item>
         <Form.Item style={{display:'flex' ,justifyContent:'center', alignContent:'center'}} name={'coverImageUrl'} >
@@ -155,25 +148,25 @@ const selectPortfolio = () => {
                      loading==='doneUpload' && imageDisplayUrl ?  <DoneIcon sx={{ fontSize: 70 , justifyContent:'center',justifyItems:'center'}} /> : ''
                     }
         </Form.Item>
-        <Form.Item name={'firstPara'}  rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'firstPara'} initialValue={UpdateData ? UpdateData[0].firstPara : ''} rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='Explain About Yourself for display in About Me Session First Para' />
         </Form.Item>
-        <Form.Item name={'secondPara'}  rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'secondPara'} initialValue={UpdateData ? UpdateData[0].secondPara : ''}  rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='Explain About Yourself for display in About Me Session Second Para' />
         </Form.Item>
-        <Form.Item name={'linkedin'}  rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'linkedin'} initialValue={UpdateData ? UpdateData[0].linkedin : ''} rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='LinkedIn Link' />
         </Form.Item>
-        <Form.Item name={'github'}  rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'github'} initialValue={UpdateData ? UpdateData[0].github : ''} rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='Github Link' />
         </Form.Item>
-        <Form.Item name={'email'}  rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'email'} initialValue={UpdateData ? UpdateData[0].email : ''} rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='Gmail' />
         </Form.Item>
-        <Form.Item name={'contact'}  rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'contact'} initialValue={UpdateData ? UpdateData[0].contact : ''} rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='Contact Number' />
         </Form.Item>
-        <Form.Item name={'portfolioUrl'}  rules={[{ required: true, message: 'This field is required' }]}>
+        <Form.Item name={'portfolioUrl'} initialValue={UpdateData ? UpdateData[0].portfolioUrl : ''} rules={[{ required: true, message: 'This field is required' }]}>
             <Input placeholder='Redirect URL without "/"' />
         </Form.Item>
         <ToastContainer />
@@ -190,60 +183,6 @@ const selectPortfolio = () => {
   )
 }
 
-export default selectPortfolio
+export default UpdatePortfolio
 
-{/* <Form.List name={'projects'}>
-            {(projects, {add ,remove}) => (
-                <>
-                    {projects.map((project,index) => {
-                        return (
-                            <div>
-                        <Space key={index} direction='horizontal' size={12}>
-                            <Form.Item key={index} name={[project.name,"projectLink"]} label={`${index+1}-Project`} >
-                                <Input placeholder='Paste Link' />
-                            </Form.Item>
-                            <Form.Item key={index} name={[project.name,"last"]} label={`${index+1}-Github`}>
-                                <Input placeholder='Paste Link' />
-                            </Form.Item>
-                            <MinusCircleOutlined style={{height:50, color: "red"}} onClick={() => remove(project.name)} />
-                        </Space> 
-                            <Form.Item style={{display:'flex' ,justifyContent:'center', alignContent:'center'}} name={'projectImageUrl'}>
-                                <input
-                                    type="file"
-                                    name="file"
-                                    id="image"
-                                    onChange={(e) => setProjectImages(e.target.files[0])}
-                                    className="input p-1 ml-6"
-                                />
-                            </Form.Item>
-                                
-                                    
-                                <Image style={{width:75}} cloudName="dk4uips8d" publicId={imageDisplayUrl} />
-                                
-                                {
-                                imageDisplayUrl ? 
-                                <>
-                                <Button type='dashed' block icon={<UploadOutlined />} onClick={removeImage} >Remove Project Image</Button>
 
-                                </>
-                                : 
-                                <>
-                                <Button type='dashed' block icon={<UploadOutlined />} onClick={projectUploadImage} >Upload Project Image</Button>
-                                <ToastContainer />
-                                </>
-                                }
-                                {
-                                loading==='spinnerActive' ?  <CircularProgress sx={{  justifyContent:'center',justifyItems:'center'}}/> : ''
-                                }
-                                {
-                                loading==='doneUpload' && imageDisplayUrl ?  <DoneIcon sx={{ fontSize: 70 , justifyContent:'center',justifyItems:'center'}} /> : ''
-                                }
-                                </div>
-                        )
-                    })}
-                    <Form.Item>
-                        <Button type='dashed' block icon={<PlusOutlined />} onClick={() => add()} >Add Projects</Button>
-                    </Form.Item>
-                </>
-            )}
-                </Form.List> */}

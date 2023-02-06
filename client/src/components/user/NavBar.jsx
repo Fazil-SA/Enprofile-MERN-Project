@@ -29,7 +29,7 @@ const NavBar = () => {
       <ul className='list-none md:flex hidden justify-end items-center flex-1'>
         {navLinks.map((nav,index) => {
           return <li key={nav.id} className={`font-poppins font-normal cursor-pointer text-[16px] text-white mr-10 hover:text-[#04535f] hover:animate-spin-bounce`}>
-            <a href={`#${nav.id}`}>
+            <a href={`${nav.id}`}>
               {nav.title}
             </a>
           </li>
@@ -53,7 +53,7 @@ const NavBar = () => {
             <ul className='list-none flex-col justify-end items-center flex-1'>
               {navLinks.map((nav,index) => {
                 return <li key={nav.id} className={`font-poppins font-normal cursor-pointer text-[16px] text-white mb-4`}>
-                  <a href={`#${nav.id}`}>
+                  <a href={`${nav.id}`}>
                     {nav.title}
                   </a>
                 </li>

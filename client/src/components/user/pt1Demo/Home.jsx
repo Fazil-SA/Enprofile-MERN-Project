@@ -20,7 +20,7 @@ const Home = (tempData) => {
             </div>
         </div>
         <div>
-            <img src={tempData.data.coverImageUrl  || HeroImg } className='rounded-2xl mx-auto w-2/3 md:w-full' alt="profileImg"/>
+            <img src={tempData.data.coverImageUrl  || HeroImg } className='rounded-2xl mx-auto w-80 h-80' alt="profileImg"/>
         </div>
       </div>   
     </div>

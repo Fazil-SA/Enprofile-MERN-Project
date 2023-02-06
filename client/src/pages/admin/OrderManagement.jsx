@@ -1,8 +1,12 @@
 import React from 'react'
+import { NavBar, Orders } from '../../components/admin/loginComponents'
 
 const OrderManagement = () => {
   return (
-    <div>OrderManagement</div>
+    <>
+    <NavBar />
+    <Orders />
+    </>
   )
 }
 
