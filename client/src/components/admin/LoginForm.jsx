@@ -105,12 +105,12 @@ const LoginForm = () => {
             </label>
           </div>
         </div>
-        <a
+        {/* <a
           href="#"
           className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
         >
           Forgot password?
-        </a>
+        </a> */}
       </div>
       <button
         type="submit"
@@ -118,7 +118,7 @@ const LoginForm = () => {
       >
         Sign in
       </button>
-      <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+      {/* <p className="text-sm font-light text-gray-500 dark:text-gray-400">
         Don’t have an account yet?{" "}
         <a
           href="#"
@@ -126,7 +126,7 @@ const LoginForm = () => {
         >
           Sign up
         </a>
-      </p>
+      </p> */}
     </form>
   );
 };

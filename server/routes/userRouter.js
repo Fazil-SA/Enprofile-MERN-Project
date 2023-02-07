@@ -17,7 +17,7 @@ router.post('/create-portfolio-user-data-upload', protect, portfolioCreation)
 
 router.post('/update-portfolio-user-data', protect, updateCreation)
 
-router.get('/displayOrders', protect, orderCrudDisplay)
+router.get('/displayOrders',protect, orderCrudDisplay)
 
 router.post('/edit-website', protect, editWebsite)
 

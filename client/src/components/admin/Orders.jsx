@@ -11,20 +11,21 @@ const Orders = () => {
 
   useEffect(() => {
     getAllUsers()
-    async function getAllUsers() {
-      const response = await axiosUserCrudInstance
-      .get('/admin/orders')
-      
-      .then((response) => {
-        setOrderDetails(response.data)
-      })
-      .catch((error) => {
-          console.log(error)
-      })
-    }
+  }, []);
+
+  const  getAllUsers = async()=> {
+    const response = await axiosUserCrudInstance
+    .post('/admin/orders')
     
-  }, [orderDetails]);
-console.log(orderDetails)
+    .then((response) => {
+      setOrderDetails(response.data)
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+  }
+  console.log(orderDetails) 
+
 
 
     const DrawerHeader = styled('div')(({ theme }) => ({

@@ -22,7 +22,7 @@ router.post('/admin/updateProduct',updateProduct)
 
 router.post('/admin/imageRemoveCl',imgRemove)
 
-router.get('/admin/orders',orders)
+router.post('/admin/orders',orders)
 
 
 module.exports = router

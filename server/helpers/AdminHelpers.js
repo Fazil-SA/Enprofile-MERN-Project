@@ -126,6 +126,7 @@ const allOrders = () => {
     return new Promise(async (resolve,reject) => {
         try {
             const result = await Portfolio.find()
+            console.log('orders:', result);
             resolve(result)
         } catch (error) {
             reject(error)
