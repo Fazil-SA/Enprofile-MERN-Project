@@ -24,7 +24,7 @@ const Orders = () => {
     }
     
   }, [orderDetails]);
-
+console.log(orderDetails)
 
 
     const DrawerHeader = styled('div')(({ theme }) => ({
@@ -53,7 +53,7 @@ const Orders = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 2 , ml:{xs: 8,md:14} , mr:{xs:2,md:8} }}>
         <DrawerHeader />
         <Typography variant='h6' className='flex justify-center font-extrabold'>All Orders</Typography>
-        <div style={{ height: 400, width: '100%' }}>
+        {/* <div style={{ height: 400, width: '100%' }}>
           <DataGrid
           getRowId={(row) => row?._id}
           rows={orderDetails}
@@ -62,7 +62,7 @@ const Orders = () => {
           rowsPerPageOptions={[5]}
           checkboxSelection 
           />
-        </div>
+        </div> */}
       </Box>
     </>
   )
